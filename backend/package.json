@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "entryPoint:deploy:mumbai": "npx hardhat run scripts/deploy_EntryPoint.ts --network mumbai",
+    "simpleAccountFactory:deploy:mumbai": "npx hardhat run scripts/deploy_SimpleAccountFactory.ts --network mumbai",
+    "entryPoint:verify:mumbai": "npx hardhat verify --network mumbai 0x607cAAF3fF8bB0469F1e9b1e3214008C0B1D05C6 ",
+    "simpleAccountFactory:verify:mumbai": "npx hardhat verify --network mumbai 0x273EAEC332c86a942358C3b45921639b0e7Ebff3 --constructor-args scripts/args/argments.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hardhat": "^2.14.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@ethersproject/abstract-provider": "^5.7.0",
+    "@ethersproject/bytes": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@openzeppelin/contracts": "^4.8.3",
+    "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
+    "ethereumjs-util": "^7.1.5",
+    "ethers": "^5.4.0",
+    "hardhat-deploy": "^0.11.26"
+  }
+}
