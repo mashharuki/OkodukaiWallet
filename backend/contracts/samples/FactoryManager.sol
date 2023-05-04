@@ -2,6 +2,7 @@
 pragma solidity ^0.8.18;
 
 import "./SimpleAccountFactory.sol";
+import "./../interfaces/IEntryPoint.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**

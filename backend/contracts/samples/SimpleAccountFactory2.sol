@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Create2.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
@@ -15,6 +16,17 @@ import "./SimpleAccount.sol";
 contract SimpleAccountFactory {
     SimpleAccount public immutable accountImplementation;
     
+    using Counters for Counters.Counter;
+
+    Counters.Counter private _walletIds;
+
+    // 新しくウォレットアドレスを作成した時のイベント
+    event Created(uint256 walletId, address addr);
+
+    /**
+     * コンストラクター
+     * @param _entryPoint エントリーポイント型のコントラクト
+     */
     constructor(IEntryPoint _entryPoint) {
         accountImplementation = new SimpleAccount(_entryPoint);
     }
@@ -26,6 +38,7 @@ contract SimpleAccountFactory {
      * This method returns an existing account address so that entryPoint.getSenderAddress() would work even after account creation
      */
     function createAccount(address owner,uint256 salt) public returns (SimpleAccount ret) {
+        uint newWAlletID = _walletIds.current();
         address addr = getAddress(owner, salt);
         uint codeSize = addr.code.length;
         if (codeSize > 0) {
@@ -35,6 +48,9 @@ contract SimpleAccountFactory {
                 address(accountImplementation),
                 abi.encodeCall(SimpleAccount.initialize, (owner))
             )));
+
+        _walletIds.increment();
+        emit Created(newWAlletID, addr);
     }
 
     /**
