@@ -1,11 +1,11 @@
 import { ethers } from "ethers";
-import { ERC20_ABI } from "../../../utils/abi";
+import { ERC20_ABI } from "../../utils/abi";
 // @ts-ignore
-import config from "../../../config.json";
+import config from "../../config.json";
 import { Client, Presets } from "userop";
-import { CLIOpts } from "../../../utils/types";
+import { CLIOpts } from "../../utils/types";
 
-export default async function main(
+export default async function erc20Transfer(
   tkn: string,
   t: string,
   amt: string,

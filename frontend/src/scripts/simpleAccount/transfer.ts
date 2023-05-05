@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { Client, Presets } from "userop";
-import { CLIOpts } from "../../../utils/types";
+import { CLIOpts } from "../../utils/types";
 // @ts-ignore
 import config from "../../config.json";
 

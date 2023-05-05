@@ -2,7 +2,7 @@ import { Presets } from "userop";
 // @ts-ignore
 import config from "../../../config.json";
 
-export default async function main() {
+export default async function address() {
   const simpleAccount = await Presets.Builder.SimpleAccount.init(
     config.signingKey,
     config.rpcUrl,

@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/scripts/simpleAccount", "utils/abi.ts", "utils/types.ts", "utils/index.ts"  ]
+, "src/scripts/simpleAccount", "src/utils/abi.ts", "src/utils/types.ts", "src/utils/index.ts"  ]
 }

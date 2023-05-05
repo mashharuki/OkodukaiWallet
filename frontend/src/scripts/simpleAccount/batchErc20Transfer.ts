@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { Client, Presets } from "userop";
-import { ERC20_ABI} from "../../../utils/abi";
-import { CLIOpts } from "../../../utils/types";
+import { ERC20_ABI} from "../../utils/abi";
+import { CLIOpts } from "../../utils/types";
 
 // @ts-ignore
 import config from "../../../config.json";

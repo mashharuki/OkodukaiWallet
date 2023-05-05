@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import './../../App.css';
-import { transfer } from '../../scripts/simpleAccount/transfer';
+import erc20Transfer from '../../scripts/simpleAccount/erc20Transfer';
 import { CLIOpts } from "../../utils/types";
 
 /**
- * Transfer Component
+ * ER20Transfer Component
  */
-const Transfer = () => { 
+const ERC20Transfer = () => { 
+    const [tokenAddress, setTokenAddress] = useState('0x326C977E6efc84E512bB9C30f76E30c160eD06FB');
     const [address, setAddress] = useState('');
     const [amount, setAmount] = useState('');
 
-    const handleTransfer = async () => {
+    const handleErc20Transfer = async () => {
         const opts: CLIOpts = {
         dryRun: false, // Set to true if you want to perform a dry run
         withPM: false, // Set to true if you want to use a paymaster
     };
     
         try {
-            await transfer(address, amount, opts);
+            await erc20Transfer(tokenAddress, address, amount, opts);
             alert('Transfer successful');
             console.log('Transfer successful');
         } catch (err) {
@@ -28,12 +29,18 @@ const Transfer = () => {
 
     return (
         <>
-            <h1>Let's transfer!!</h1>
+            <h1>Let's ERC20 Token transfer!!</h1>
+            <input
+                type="text"
+                value={tokenAddress}
+                onChange={(e) => setTokenAddress(e.target.value)}
+                placeholder="Enter ERC20 Token address"
+            />
             <input
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="Enter address"
+                placeholder="Enter to address"
             />
             <input
                 type="text"
@@ -42,7 +49,7 @@ const Transfer = () => {
                 placeholder="Enter amount"
             />
             <button 
-                onClick={handleTransfer}
+                onClick={handleErc20Transfer}
             >
                 Transfer
             </button>
@@ -50,4 +57,4 @@ const Transfer = () => {
     );
 }
 
-export default Transfer;
+export default ERC20Transfer;
