@@ -1,5 +1,5 @@
 # SampleAADapp
-SampleAADapp (React.js + Hardhat)
+SampleAADapp (React.js + Hardhat + TheGraph)
 
 ## Contract Info
 
