@@ -69,10 +69,7 @@ contract SimpleAccountFactory {
             )));
     }
     
-    /**
-     * addStaek method
-     */
-    function addStake(uint32 unstakeDelaySec) external payable{
+    function addStake(uint32 unstakeDelaySec) external payable {
         entryPoint.addStake{value: msg.value}(unstakeDelaySec);
     }
 }

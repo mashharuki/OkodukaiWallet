@@ -12,7 +12,7 @@
     "DepositPaymaster:deploy:mumbai": "npx hardhat run scripts/deploy_DepositPaymaster.ts --network mumbai",
     "entryPoint:verify:mumbai": "npx hardhat verify --network mumbai 0x607cAAF3fF8bB0469F1e9b1e3214008C0B1D05C6 ",
     "simpleAccountFactory:verify:mumbai": "npx hardhat verify --network mumbai 0x273EAEC332c86a942358C3b45921639b0e7Ebff3 --constructor-args scripts/args/argments.ts",
-    "FactoryManager:verify:mumbai": "npx hardhat verify 0x398004F2698648159b8E82A13fd87ea0B1f8f84e --network mumbai",
+    "FactoryManager:verify:mumbai": "npx hardhat verify 0xdd0412fDdD27bd54115E63E62f04318C4B4154F4 --network mumbai",
     "DepositPaymaster:verify:mumbai": "npx hardhat verify 0x93fdd51462FB20fB631F8CA38c3DeB87583311Ea --network mumbai --constructor-args scripts/args/entryPoint.ts"
   },
   "keywords": [],

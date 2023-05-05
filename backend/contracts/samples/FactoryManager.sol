@@ -22,7 +22,7 @@ contract FactoryManager {
     mapping (uint => address) public factoryMap;
 
     // SimpleAccountFactory コントラクトを生成した時のイベント
-    event FactoryCreated (uint id, address factoryAddress);
+    event FactoryCreated (uint factoryId, address factoryAddress);
 
     /**
      * Factoryコントラクトを生成するための関数
@@ -52,9 +52,9 @@ contract FactoryManager {
      * @param factoryAddress factoryコントラクトのアドレス
      * @param unstakeDelaySec unstakeDelaySec
      */
-    function addStake(address factoryAddress, uint32 unstakeDelaySec) public {
+    function addStake(address factoryAddress, uint32 unstakeDelaySec) public payable {
         SimpleAccountFactory factory = SimpleAccountFactory(factoryAddress);
         // addStake()を呼び出し
-        factory.addStake(unstakeDelaySec);
+        factory.addStake{value: msg.value}(unstakeDelaySec);
     }
 }

@@ -1,0 +1,24 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: FactoryManager
+    network: mumbai
+    source:
+      address: "0xdd0412fDdD27bd54115E63E62f04318C4B4154F4"
+      abi: FactoryManager
+      startBlock: 35199820
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - FactoryCreated
+      abis:
+        - name: FactoryManager
+          file: ./abis/FactoryManager.json
+      eventHandlers:
+        - event: FactoryCreated(uint256,address)
+          handler: handleFactoryCreated
+      file: ./src/factory-manager.ts

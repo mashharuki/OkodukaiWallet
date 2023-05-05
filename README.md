@@ -5,9 +5,24 @@ SampleAADapp (React.js + Hardhat)
 
 |No.|コントラクト名|アドレス|ネットワーク|
 |:-----|:-----|:-----|:-----|
-|1|FactoryManager|[0x398004F2698648159b8E82A13fd87ea0B1f8f84e](https://mumbai.polygonscan.com/address/0x398004F2698648159b8E82A13fd87ea0B1f8f84e#code)|Mumbai|
+|1|FactoryManager|[0xdd0412fDdD27bd54115E63E62f04318C4B4154F4](https://mumbai.polygonscan.com/address/0xdd0412fDdD27bd54115E63E62f04318C4B4154F4#code)|Mumbai|
 |2|EntryPoint|[0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789](https://mumbai.polygonscan.com/address/0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789#code)|Mumbai|
 |3|DepositPaymaster|[0x93fdd51462FB20fB631F8CA38c3DeB87583311Ea](https://mumbai.polygonscan.com/address/0x93fdd51462FB20fB631F8CA38c3DeB87583311Ea#code)|Mumbai|
+
+## Deployed Subgraph
+
+[SubGraph](https://api.studio.thegraph.com/query/44992/aa-factorymanager/v0.0.1)
+
+- Sample Query (生成したFacotryコントラクトの情報を一括で取得するクエリ)
+
+```gql
+query MyQuery {
+  factoryCreateds {
+    factoryId
+    factoryAddress
+  }
+}
+```
 
 ## なぜそれを開発しようと考えたのか
 

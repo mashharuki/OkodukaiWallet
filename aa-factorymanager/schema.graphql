@@ -1,0 +1,8 @@
+type FactoryCreated @entity(immutable: true) {
+  id: Bytes!
+  factoryId: BigInt! # uint256
+  factoryAddress: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
