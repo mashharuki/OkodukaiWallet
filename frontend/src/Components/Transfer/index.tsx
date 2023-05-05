@@ -6,23 +6,30 @@ import { CLIOpts } from "../../utils/types";
 /**
  * Transfer Component
  */
-const Transfer = () => { 
+const Transfer = (props:any) => { 
     const [address, setAddress] = useState('');
     const [amount, setAmount] = useState('');
 
+    const {
+        setIsLoading
+    } = props;
+
     const handleTransfer = async () => {
         const opts: CLIOpts = {
-        dryRun: false, // Set to true if you want to perform a dry run
-        withPM: false, // Set to true if you want to use a paymaster
-    };
+            dryRun: false, // Set to true if you want to perform a dry run
+            withPM: false, // Set to true if you want to use a paymaster
+        };
     
         try {
+            setIsLoading(true);
             await transfer(address, amount, opts);
             alert('Transfer successful');
             console.log('Transfer successful');
+            setIsLoading(false);
         } catch (err) {
             console.error('Transfer failed', err);
             alert('Transfer failed');
+            setIsLoading(false);
         }
     };
 
