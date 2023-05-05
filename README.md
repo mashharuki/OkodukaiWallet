@@ -17,12 +17,23 @@ SampleAADapp (React.js + Hardhat + TheGraph)
 
 ```gql
 query MyQuery {
-  factoryCreateds {
+  factoryCreateds(orderBy: id, orderDirection: desc) {
     factoryId
     factoryAddress
   }
 }
 ```
+
+## トランザクションの記録 (Mumbai Network)
+
+|No.|トランザクションハッシュ|概要|
+|:----|:----|:----|
+|1|[0xe62537028fc2be51a7a0121926bf7ed024531577ce03f085135618fc1613ba26](https://mumbai.polygonscan.com/tx/0xe62537028fc2be51a7a0121926bf7ed024531577ce03f085135618fc1613ba26)|FactoryManagerコントラクトのデプロイ| 
+|2|[0xd16efa3e05c61dd0186434594f6c9004b7cc086ccc2cf6e12c3122fc985935e3](https://mumbai.polygonscan.com/tx/0xd16efa3e05c61dd0186434594f6c9004b7cc086ccc2cf6e12c3122fc985935e3)|FactoryManagerコントラクトからSimpleAccountFacotoryコントラクトを生成したTx| 
+|3|[0x0bf4ad5dd446d9b64e0e981506688b6d2159d1d1ad358317dad6380247f77c31](https://mumbai.polygonscan.com/tx/0x0bf4ad5dd446d9b64e0e981506688b6d2159d1d1ad358317dad6380247f77c31)|FactoryManagerコントラクト経由でEntryPointコントラクトに対してaddStakeしたTx| 
+|4|[0x6b333e0b0587d3bfc7432f1cac0b163238cc9a0de27630d5fd7d263734c1b010](https://mumbai.polygonscan.com/tx/0x6b333e0b0587d3bfc7432f1cac0b163238cc9a0de27630d5fd7d263734c1b010)|SimpleAccountコントラクトからネイティブトークンを送金したTx| 
+|5|[0xaba33331fbd001e9a6f976c21c2abaf5f44ca20e6c6bc06a7a35b3cc183f596f](https://mumbai.polygonscan.com/tx/0xaba33331fbd001e9a6f976c21c2abaf5f44ca20e6c6bc06a7a35b3cc183f596f)|SimpleAccountコントラクトからERC20トークンを送金したTx| 
+
 
 ## なぜそれを開発しようと考えたのか
 
@@ -86,14 +97,14 @@ Web3のマスアダプションのため。
 - Bundler - 複数のUserOperationをバンドルし、EntryPoint.handleOps()トランザクションを作成するノード（ブロックビルダー）です。ネットワーク上のすべてのブロックビルダーがバンドラーであることを要求されるわけではないことに注意してください
 - アグリゲーター - アグリゲートされた署名を検証するために、アカウントによって信頼されるヘルパー契約です。バンドラー/クライアントは、サポートされるアグリゲーターをホワイトリスト化します。
 
-### アーキテクチャ
+### AAのアーキテクチャ
 
 アカウントアブストラクションを実現するためのコンポーネント
 1. EntryPoint contract (エントリーポイントコントラクト)
 2. Paymaster contract (コントラクト)
 3. UserOperation (ユーザーが実行したいトランザクション本体のデータ)
 4. Bundler (トランザクションを束ねてブロックチェーンに送信するためのAPIサーバー)
-5. Miner (？)
+5. Miner (マイナー)
 6. client library (アカウントアブストラクションの機能を呼び出すためのクライアントライブラリ)
 
 ## エクステンション：ペイマスターズ
