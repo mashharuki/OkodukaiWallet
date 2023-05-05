@@ -9,7 +9,7 @@ const main = async function () {
   const entryPoint = await EntryPoint.deploy();
   await entryPoint.deployed();
 
-  const simpleAccountFactory = await ethers.getContractFactory("SimpleAccountFactory");
+  const simpleAccountFactory = await ethers.getContractFactory("SimpleAccountFactory2");
   // 自分でEntry Pointコントラクトをデプロして指定する場合はこっち
   // const ret = await simpleAccountFactory.deploy(entryPoint.address);
   // StackUpのBundlerを使用する時はStackUpが用意してくれているEntryPoint Contractを指定した方が安定する。

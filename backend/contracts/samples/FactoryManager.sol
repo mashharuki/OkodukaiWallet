@@ -42,8 +42,19 @@ contract FactoryManager {
     /**
      * 生成したFactoryコントラクトの情報を取得するコントラクト
      */
-     function getFactories() public view returns (SimpleAccountFactory[] memory coll) {
+    function getFactories() public view returns (SimpleAccountFactory[] memory coll) {
         //返却
         return factories;
+    }
+
+    /**
+     * addStakeを実行するためのメソッド
+     * @param factoryAddress factoryコントラクトのアドレス
+     * @param unstakeDelaySec unstakeDelaySec
+     */
+    function addStake(address factoryAddress, uint32 unstakeDelaySec) public {
+        SimpleAccountFactory factory = SimpleAccountFactory(factoryAddress);
+        // addStake()を呼び出し
+        factory.addStake(unstakeDelaySec);
     }
 }
