@@ -37,32 +37,35 @@ const ERC20Transfer = (props:any) => {
     };
 
     return (
-        <>
+        <div>
             <h1>Let's ERC20 Token transfer!!</h1>
             <input
+                className='block'
                 type="text"
                 value={tokenAddress}
                 onChange={(e) => setTokenAddress(e.target.value)}
                 placeholder="Enter ERC20 Token address"
             />
             <input
+                className='block'
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter to address"
             />
             <input
+                className='block'
                 type="text"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Enter amount"
             />
-            <button 
+            <button
                 onClick={handleErc20Transfer}
             >
                 Transfer
             </button>
-        </>
+        </div>
     );
 }
 

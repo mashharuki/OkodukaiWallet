@@ -61,14 +61,14 @@ const TableRow = (porps: Props) => {
     });
 
     return (
-        <tr key={factoryCreated.factoryId}>
-            <td>{factoryCreated.factoryId}</td>
-            <td>
+        <tr key={factoryCreated.factoryId} className="border-b border-slate-300">
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{factoryCreated.factoryId}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
                 <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
                     {sliceFactoryAddress}
                 </a>
             </td>
-            <td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
                 <Link to='/transfer' state={{
                     factoryAddress: factoryCreated.factoryAddress,
                     contractAddress: address
@@ -76,7 +76,7 @@ const TableRow = (porps: Props) => {
                     {address}
                 </Link>
             </td>
-            <td>{balance}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{balance}</td>
         </tr>
     )
 }

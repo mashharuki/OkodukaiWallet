@@ -23,7 +23,7 @@ function Home() {
           <Spinner/>
         : (
           <>
-            <div>Deployed FactoryContract by FactoryManager</div>
+            <div className="mb-16">Deployed FactoryContract by FactoryManager</div>
             {data !== undefined && <FactoryTable data={data} />}
           </>
         )}

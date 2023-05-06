@@ -7,24 +7,27 @@ import Spinner from "../common/Spinner";
 
 const TxnPage = () => {
   const [isLoading, setIsLoading] = useState(false);
+
   const location = useLocation();
   const factoryAddress = location.state.factoryAddress;
   const contractAddress = location.state.contractAddress;
 
   return(
-    <header className="App-header">
-      <h1>Account Abstruction Dapp</h1>
-      <h2>factoryAddress: {factoryAddress}</h2>
-      <h2>contractAddress: {contractAddress}</h2>
-      {isLoading ?
-      <Spinner/>:(
-        <>
-          <Transfer setIsLoading={setIsLoading} factoryAddress={factoryAddress}/>
-          <ERC20Transfer setIsLoading={setIsLoading} factoryAddress={factoryAddress}/>
-        </>
-      )
-    }
-    </header>
+    <div className="App">
+      <header className="App-header">
+        <h1>Account Abstruction Dapp</h1>
+        <h2 className='text-base'>factory address: {factoryAddress}</h2>
+        <h2 className='text-base mb-8'>contract address: {contractAddress}</h2>
+        {isLoading ?
+        <Spinner/>:(
+          <div className='flex flex-row gap-16'>
+            <Transfer setIsLoading={setIsLoading} factoryAddress={factoryAddress}/>
+            <ERC20Transfer setIsLoading={setIsLoading} factoryAddress={factoryAddress}/>
+          </div>
+        )
+      }
+      </header>
+    </div>
   )
 }
 

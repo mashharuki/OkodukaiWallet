@@ -35,15 +35,17 @@ const Transfer = (props:any) => {
     };
 
     return (
-        <>
+        <div>
             <h1>Let's transfer!!</h1>
             <input
+                className='block'
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter address"
             />
             <input
+                className='block'
                 type="text"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
@@ -54,7 +56,7 @@ const Transfer = (props:any) => {
             >
                 Transfer
             </button>
-        </>
+        </div>
     );
 }
 
