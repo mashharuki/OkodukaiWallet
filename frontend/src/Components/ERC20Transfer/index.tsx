@@ -12,7 +12,9 @@ const ERC20Transfer = (props:any) => {
     const [amount, setAmount] = useState('');
 
     const {
-        setIsLoading
+        setIsLoading,
+        factoryAddress,
+        contractAddress,
     } = props;
 
     const handleErc20Transfer = async () => {
@@ -23,7 +25,7 @@ const ERC20Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
-            await erc20Transfer(tokenAddress, address, amount, opts);
+            await erc20Transfer(tokenAddress, address, amount, opts, factoryAddress);
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);

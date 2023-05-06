@@ -17,6 +17,7 @@ const TableRow = (porps: Props) => {
     const [balance, setBalance] = useState('0');
 
     const factoryCreated = porps.factoryCreated;
+    const sliceFactoryAddress = (factoryCreated.factoryAddress).slice(0, 6) + '...';
 
     /**
      * コントラクトウォレットのアドレスを取得するためのメソッド
@@ -45,8 +46,10 @@ const TableRow = (porps: Props) => {
         // 残高を取得する。
         const provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com');
         const getBalancePromise = await provider.getBalance(contractWalletAddress);
-        console.log("balance:", getBalancePromise)
-        setBalance(ethers.utils.formatEther(getBalancePromise))
+        console.log("balance:", getBalancePromise);
+        const formatBalance = Number(ethers.utils.formatEther(getBalancePromise));
+        const balance = String(formatBalance.toFixed(3));
+        setBalance(balance);
     }
 
     useEffect(() => { 
@@ -62,11 +65,14 @@ const TableRow = (porps: Props) => {
             <td>{factoryCreated.factoryId}</td>
             <td>
                 <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
-                    {factoryCreated.factoryAddress}
+                    {sliceFactoryAddress}
                 </a>
             </td>
             <td>
-                <Link to='/transfer' state={{contractAddress: address}}>
+                <Link to='/transfer' state={{
+                    factoryAddress: factoryCreated.factoryAddress,
+                    contractAddress: address
+                    }}>
                     {address}
                 </Link>
             </td>

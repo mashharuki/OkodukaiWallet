@@ -4,7 +4,7 @@ import { CLIOpts } from "../../utils/types";
 // @ts-ignore
 import config from "../../config.json";
 
-export async function transfer(t: string, amt: string, opts: CLIOpts) {
+export async function transfer(t: string, amt: string, opts: CLIOpts, factoryAddress: string) {
   const paymaster = opts.withPM
     ? Presets.Middleware.verifyingPaymaster(
         config.paymaster.rpcUrl,
@@ -15,7 +15,8 @@ export async function transfer(t: string, amt: string, opts: CLIOpts) {
     config.signingKey,
     config.rpcUrl,
     config.entryPoint,
-    config.simpleAccountFactory,
+    // config.simpleAccountFactory,
+    factoryAddress,
     paymaster
   );
   const client = await Client.init(config.rpcUrl, config.entryPoint);

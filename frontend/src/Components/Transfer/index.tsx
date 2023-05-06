@@ -11,7 +11,8 @@ const Transfer = (props:any) => {
     const [amount, setAmount] = useState('');
 
     const {
-        setIsLoading
+        setIsLoading,
+        factoryAddress
     } = props;
 
     const handleTransfer = async () => {
@@ -22,7 +23,7 @@ const Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
-            await transfer(address, amount, opts);
+            await transfer(address, amount, opts, factoryAddress);
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);
