@@ -11,7 +11,8 @@ const Transfer = (props:any) => {
     const [amount, setAmount] = useState('');
 
     const {
-        setIsLoading
+        setIsLoading,
+        factoryAddress
     } = props;
 
     const handleTransfer = async () => {
@@ -22,7 +23,7 @@ const Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
-            await transfer(address, amount, opts);
+            await transfer(address, amount, opts, factoryAddress);
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);
@@ -34,15 +35,17 @@ const Transfer = (props:any) => {
     };
 
     return (
-        <>
-            <h1>Let's transfer!!</h1>
+        <div className='px-6 py-6 bg-white rounded-md border-b border-gray-200'>
+            <h1 className='text-lg mb-4'>Let's transfer!!</h1>
             <input
+                className='block'
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter address"
             />
             <input
+                className='block'
                 type="text"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
@@ -53,7 +56,7 @@ const Transfer = (props:any) => {
             >
                 Transfer
             </button>
-        </>
+        </div>
     );
 }
 

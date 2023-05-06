@@ -34,7 +34,7 @@ program
     transfer(opts.to, opts.amount, {
       dryRun: Boolean(opts.dryRun),
       withPM: Boolean(opts.withPaymaster),
-    })
+    },opts.factoryAddress)
   );
 
 program
@@ -52,7 +52,7 @@ program
     erc20Transfer(opts.token, opts.to, opts.amount, {
       dryRun: Boolean(opts.dryRun),
       withPM: Boolean(opts.withPaymaster),
-    })
+    }, opts.factoryAddress)
   );
 
 program

@@ -1,13 +1,8 @@
-import React,{ useEffect, useState } from 'react';
 import './App.css';
-import Transfer from './Components/Transfer';
-import ERC20Transfer from './Components/ERC20Transfer';
-import Spinner from './Components/common/Spinner';
-import config from './config.json';
-import { Presets } from 'userop';
-import query from './graphql/query';
-import { Client, Provider, cacheExchange, fetchExchange, useQuery } from 'urql';
-import FactoryTable from './Components/FactoryTable';
+import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import TxnPage from './Components/Page/TxnPage';
+import Home from './Components/Page/Home';
 import Header from './Components/common/Header';
 import { CurrentAccountProvider } from "./context/CurrentAccountProvider";
 
@@ -25,63 +20,25 @@ const client = new Client({
  * @returns 
  */
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [generatedAddress, setGeneratedAddress] = useState('');
-
-  // execute query
-  const [result] = useQuery({ query });
-  const { data, fetching, error } = result;
-  
-  useEffect(() => {
-    /**
-     * 初期化メソッド
-     */
-    const init = async () => {
-      setIsLoading(true);
-
-      const simpleAccount = await Presets.Builder.SimpleAccount.init(
-        config.signingKey,
-        config.rpcUrl,
-        config.entryPoint,
-        config.simpleAccountFactory
-      );
-
-      const address = simpleAccount.getSender();
-      setGeneratedAddress(address);
-      setIsLoading(false);
-    };
-    // 初期化メソッド呼び出し
-    init();
-  }, []);
-
-  return (
+  return(
     <>
-      <Header/> 
-      <div className="App">
-        <header className="App-header">
-          {isLoading ?
-            <Spinner/>
-          : (
-            <>
-              Generated Address : {generatedAddress}
-              <Transfer setIsLoading={setIsLoading} /> 
-              <ERC20Transfer setIsLoading={setIsLoading} />
-              <div>Deployed FactoryContract by FactoryManager</div>
-              {data !== undefined && <FactoryTable data={data} />}
-            </>
-          )}
-        </header>
-      </div>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/transfer' element={<TxnPage/>}/>
+      </Routes>
     </>
-  );
+  )
 }
 
 function Root() {
   return (
     <CurrentAccountProvider>
       <Provider value={client}>
-        <App />
-      </Provider>
+        <BrowserRouter>
+        <App/>
+        </BrowserRouter>
+    </Provider>
     </CurrentAccountProvider>
   );
 }

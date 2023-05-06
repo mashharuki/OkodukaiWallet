@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Presets } from 'userop';
 import { shortAddress } from '../../utils/ethereum';
 import SendModal from '../common/SendModal';
+import { Link } from 'react-router-dom';
 
 interface Props {
     factoryCreated: FactoryCreated;
@@ -18,6 +19,7 @@ const TableRow = (porps: Props) => {
     const [balance, setBalance] = useState('0');
 
     const factoryCreated = porps.factoryCreated;
+    const sliceFactoryAddress = (factoryCreated.factoryAddress).slice(0, 6) + '...';
 
     /**
      * コントラクトウォレットのアドレスを取得するためのメソッド
@@ -46,8 +48,10 @@ const TableRow = (porps: Props) => {
         // 残高を取得する。
         const provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com');
         const getBalancePromise = await provider.getBalance(contractWalletAddress);
-        console.log("balance:", getBalancePromise)
-        setBalance(ethers.utils.formatEther(getBalancePromise))
+        console.log("balance:", getBalancePromise);
+        const formatBalance = Number(ethers.utils.formatEther(getBalancePromise));
+        const balance = String(formatBalance.toFixed(3));
+        setBalance(balance);
     }
 
     useEffect(() => { 
@@ -59,16 +63,25 @@ const TableRow = (porps: Props) => {
     });
 
     return (
-        <tr key={factoryCreated.factoryId}>
-            <td>{factoryCreated.factoryId}</td>
-            <td>
+        <tr key={factoryCreated.factoryId} className="border-b border-slate-300">
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{factoryCreated.factoryId}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
                 <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
                     {shortAddress(factoryCreated.factoryAddress)}
                 </a>
             </td>
-            <td>{shortAddress(address)}</td>
-            <td>{balance}</td>
-            <td><SendModal address={address} /></td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
+                <Link to='/transfer' state={{
+                    factoryAddress: factoryCreated.factoryAddress,
+                    contractAddress: address
+                    }}>
+                    {address}
+                </Link>
+            </td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{balance}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                <SendModal address={address} />
+            </td>
         </tr>
     )
 }
