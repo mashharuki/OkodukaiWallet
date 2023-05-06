@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import { FactoryCreated } from '../../utils/types';
 import { useEffect, useState } from 'react';
 import { Presets } from 'userop';
+import { Link } from 'react-router-dom';
 
 interface Props {
     factoryCreated: FactoryCreated;
@@ -64,7 +65,11 @@ const TableRow = (porps: Props) => {
                     {factoryCreated.factoryAddress}
                 </a>
             </td>
-            <td>{address}</td>
+            <td>
+                <Link to='/transfer' state={{contractAddress: address}}>
+                    {address}
+                </Link>
+            </td>
             <td>{balance}</td>
         </tr>
     )

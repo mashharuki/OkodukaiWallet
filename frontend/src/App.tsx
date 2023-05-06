@@ -8,6 +8,8 @@ import { Presets } from 'userop';
 import query from './graphql/query';
 import { Client, Provider, cacheExchange, fetchExchange, useQuery } from 'urql';
 import FactoryTable from './Components/FactoryTable';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import TxnPage from './Components/Page/TxnPage';
 
 // SubGraph用の API エンドポイント
 const API_URL = "https://api.studio.thegraph.com/query/44992/aa-factorymanager/v0.0.1";
@@ -60,9 +62,9 @@ function App() {
           <Spinner/>
         : (
           <>
-            Generated Address : {generatedAddress}
+            {/* Generated Address : {generatedAddress}
             <Transfer setIsLoading={setIsLoading} /> 
-            <ERC20Transfer setIsLoading={setIsLoading} />
+            <ERC20Transfer setIsLoading={setIsLoading} /> */}
             <div>Deployed FactoryContract by FactoryManager</div>
             {data !== undefined && <FactoryTable data={data} />}
           </>
@@ -75,7 +77,12 @@ function App() {
 function Root() {
   return (
     <Provider value={client}>
-      <App />
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<App/>}/>
+        <Route path='/transfer' element={<TxnPage/>}/>
+      </Routes>
+      </BrowserRouter>
     </Provider>
   );
 }
