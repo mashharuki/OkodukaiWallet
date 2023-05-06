@@ -3,6 +3,8 @@ import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import TxnPage from './Components/Page/TxnPage';
 import Home from './Components/Page/Home';
+import Header from './Components/common/Header';
+import { CurrentAccountProvider } from "./context/CurrentAccountProvider";
 
 // SubGraph用の API エンドポイント
 const API_URL = "https://api.studio.thegraph.com/query/44992/aa-factorymanager/v0.0.1";
@@ -19,20 +21,25 @@ const client = new Client({
  */
 function App() {
   return(
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/transfer' element={<TxnPage/>}/>
-    </Routes>
+    <>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/transfer' element={<TxnPage/>}/>
+      </Routes>
+    </>
   )
 }
 
 function Root() {
   return (
-    <Provider value={client}>
-      <BrowserRouter>
+    <CurrentAccountProvider>
+      <Provider value={client}>
+        <BrowserRouter>
         <App/>
-      </BrowserRouter>
+        </BrowserRouter>
     </Provider>
+    </CurrentAccountProvider>
   );
 }
 

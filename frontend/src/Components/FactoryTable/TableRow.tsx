@@ -3,6 +3,8 @@ import { ethers } from 'ethers';
 import { FactoryCreated } from '../../utils/types';
 import { useEffect, useState } from 'react';
 import { Presets } from 'userop';
+import { shortAddress } from '../../utils/ethereum';
+import SendModal from '../common/SendModal';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -65,7 +67,7 @@ const TableRow = (porps: Props) => {
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{factoryCreated.factoryId}</td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
                 <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
-                    {sliceFactoryAddress}
+                    {shortAddress(factoryCreated.factoryAddress)}
                 </a>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
@@ -77,6 +79,7 @@ const TableRow = (porps: Props) => {
                 </Link>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{balance}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'><SendModal address={address} /></td>
         </tr>
     )
 }
