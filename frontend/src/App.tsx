@@ -8,6 +8,8 @@ import { Presets } from 'userop';
 import query from './graphql/query';
 import { Client, Provider, cacheExchange, fetchExchange, useQuery } from 'urql';
 import FactoryTable from './Components/FactoryTable';
+import Header from './Components/common/Header';
+import { CurrentAccountProvider } from "./context/CurrentAccountProvider";
 
 // SubGraph用の API エンドポイント
 const API_URL = "https://api.studio.thegraph.com/query/44992/aa-factorymanager/v0.0.1";
@@ -53,30 +55,34 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Account Abstruction Dapp</h1>
-        {isLoading ?
-          <Spinner/>
-        : (
-          <>
-            Generated Address : {generatedAddress}
-            <Transfer setIsLoading={setIsLoading} /> 
-            <ERC20Transfer setIsLoading={setIsLoading} />
-            <div>Deployed FactoryContract by FactoryManager</div>
-            {data !== undefined && <FactoryTable data={data} />}
-          </>
-        )}
-      </header>
-    </div>
+    <>
+      <Header/> 
+      <div className="App">
+        <header className="App-header">
+          {isLoading ?
+            <Spinner/>
+          : (
+            <>
+              Generated Address : {generatedAddress}
+              <Transfer setIsLoading={setIsLoading} /> 
+              <ERC20Transfer setIsLoading={setIsLoading} />
+              <div>Deployed FactoryContract by FactoryManager</div>
+              {data !== undefined && <FactoryTable data={data} />}
+            </>
+          )}
+        </header>
+      </div>
+    </>
   );
 }
 
 function Root() {
   return (
-    <Provider value={client}>
-      <App />
-    </Provider>
+    <CurrentAccountProvider>
+      <Provider value={client}>
+        <App />
+      </Provider>
+    </CurrentAccountProvider>
   );
 }
 
