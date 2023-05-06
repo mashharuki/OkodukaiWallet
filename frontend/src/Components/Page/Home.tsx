@@ -18,12 +18,10 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Account Abstruction Dapp</h1>
         {isLoading ?
           <Spinner/>
         : (
           <>
-            <div className="mb-16">Deployed FactoryContract by FactoryManager</div>
             {data !== undefined && <FactoryTable data={data} />}
           </>
         )}

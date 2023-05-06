@@ -68,7 +68,7 @@ const SendModal = (props: Props) => {
             { showModal ?
                 <div className="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
                     <div role="alert" className="container mx-auto w-11/12 md:w-2/3 max-w-lg text-left">
-                        <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
+                        <div className="relative py-8 px-5 md:px-2 bg-white shadow-md rounded border border-gray-400">
                             <div className="w-full flex justify-start text-gray-600 mb-3">
                                 <svg  xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet" width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -124,9 +124,9 @@ const SendModal = (props: Props) => {
                     </div>
                 </div>
             : 
-            <div className="w-full flex justify-center py-12" id="button">
+            <div className="w-full flex justify-center" id="button">
                 <button 
-                    className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" 
+                    className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out rounded-full px-4 sm:px-8 py-2 text-xs sm:text-sm"
                     onClick={handleModal}
                 >
                     Open Modal

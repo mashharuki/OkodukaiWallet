@@ -35,8 +35,8 @@ const Transfer = (props:any) => {
     };
 
     return (
-        <div>
-            <h1>Let's transfer!!</h1>
+        <div className='px-6 py-6 bg-white rounded-md border-b border-gray-200'>
+            <h1 className='text-lg mb-4'>Let's transfer!!</h1>
             <input
                 className='block'
                 type="text"

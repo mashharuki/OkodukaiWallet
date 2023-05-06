@@ -79,7 +79,9 @@ const TableRow = (porps: Props) => {
                 </Link>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{balance}</td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'><SendModal address={address} /></td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                <SendModal address={address} />
+            </td>
         </tr>
     )
 }

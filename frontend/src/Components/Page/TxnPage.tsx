@@ -15,7 +15,6 @@ const TxnPage = () => {
   return(
     <div className="App">
       <header className="App-header">
-        <h1>Account Abstruction Dapp</h1>
         <h2 className='text-base'>factory address: {factoryAddress}</h2>
         <h2 className='text-base mb-8'>contract address: {contractAddress}</h2>
         {isLoading ?
