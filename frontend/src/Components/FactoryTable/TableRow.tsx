@@ -3,6 +3,8 @@ import { ethers } from 'ethers';
 import { FactoryCreated } from '../../utils/types';
 import { useEffect, useState } from 'react';
 import { Presets } from 'userop';
+import { shortAddress } from '../../utils/ethereum';
+import SendModal from '../common/SendModal';
 
 interface Props {
     factoryCreated: FactoryCreated;
@@ -61,11 +63,12 @@ const TableRow = (porps: Props) => {
             <td>{factoryCreated.factoryId}</td>
             <td>
                 <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
-                    {factoryCreated.factoryAddress}
+                    {shortAddress(factoryCreated.factoryAddress)}
                 </a>
             </td>
-            <td>{address}</td>
+            <td>{shortAddress(address)}</td>
             <td>{balance}</td>
+            <td><SendModal address={address} /></td>
         </tr>
     )
 }

@@ -32,6 +32,7 @@ const FactoryTable = ({ data }:Props) => {
                     <th>Factory Address</th>
                     <th>Contract Wallet Address</th>
                     <th>Balance</th>
+                    <th>Deposit</th>
                 </tr>
             </thead>
             <tbody>

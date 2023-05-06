@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@metamask/detect-provider": "^2.0.0",
     "@metamask/providers": "^10.2.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -14,7 +15,7 @@
     "autoprefixer": "^10.4.14",
     "commander": "^10.0.1",
     "dotenv": "^16.0.3",
-    "ethers": "^5.7.2",
+    "ethers": "5.4.0",
     "graphql": "^16.6.0",
     "postcss": "^8.4.23",
     "react": "^18.2.0",
