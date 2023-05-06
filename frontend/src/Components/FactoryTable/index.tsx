@@ -1,4 +1,6 @@
 import { FactoryCreated } from './../../utils/types';
+import TableRow from './TableRow';
+
 
 interface Props {
   data: { factoryCreateds: FactoryCreated[] };
@@ -12,16 +14,15 @@ const FactoryTable = ({ data }:Props) => {
 
     const { factoryCreateds } = data;
 
-    const tableRows = factoryCreateds.map((factoryCreated: FactoryCreated) => (
-        <tr key={factoryCreated.factoryId}>
-            <td>{factoryCreated.factoryId}</td>
-            <td>
-                <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
-                    {factoryCreated.factoryAddress}
-                </a>
-            </td>
-        </tr>
-    ))
+    /**
+     * tableRows
+     */
+    const TableRows = () => {
+        return (factoryCreateds.map((factoryCreated: FactoryCreated) => (
+            <TableRow factoryCreated={factoryCreated} />
+        )))
+    }
+        
 
     return (
         <table>
@@ -29,10 +30,12 @@ const FactoryTable = ({ data }:Props) => {
                 <tr>
                     <th>Factory ID</th>
                     <th>Factory Address</th>
+                    <th>Contract Wallet Address</th>
+                    <th>Balance</th>
                 </tr>
             </thead>
             <tbody>
-                {tableRows}
+                {TableRows()}
             </tbody>
         </table>
     );
