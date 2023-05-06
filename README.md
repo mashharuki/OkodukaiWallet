@@ -72,7 +72,7 @@ Web3のマスアダプションのため。
 |:----|:----|:----|
 |mashharuki|[Github](https://github.com/mashharuki)|[Twitter](https://twitter.com/HARUKI05758694)|
 |hakua|[Github]()|[Twitter]()|
-|mameta|[Github]()|[Twitter]()|
+|mameta|[Github](https://github.com/Mameta29)|[Twitter](https://twitter.com/TeaTuberMameta)|
 
 ## 今後の課題や目標
 
