@@ -1,5 +1,5 @@
-# SampleAADapp
-SampleAADapp (React.js + Hardhat + TheGraph)
+# Okodukai Wallet
+Okodukai Wallet (React.js + Hardhat + TheGraph)
 
 ## Contract Info
 
@@ -47,10 +47,9 @@ Web3のマスアダプションのため。
 
 ## 実際のデモ
 
+[Youtube](https://youtu.be/Jff6IcQmejY)
 
 ## 工夫やユニークポイント
-
-実装までは至らなかったが、下記ようなアプリを作りたいと考えてしました。
 
 - 全体像
 
