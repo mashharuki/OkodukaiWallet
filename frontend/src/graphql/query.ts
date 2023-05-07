@@ -3,10 +3,7 @@ import { gql } from 'urql';
 // query
 const query = gql`
     query MyQuery {
-        factoryCreateds(
-            orderBy: id, 
-            orderDirection: desc
-        ) {
+        factoryCreateds(orderBy: factoryId, orderDirection: asc) {
             factoryId
             factoryAddress
         }
