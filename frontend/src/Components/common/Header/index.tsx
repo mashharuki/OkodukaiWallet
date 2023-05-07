@@ -1,5 +1,5 @@
-import CurrentAccountContext from '../../../context/CurrentAccountProvider';
 import { useContext } from "react";
+import CurrentAccountContext from '../../../context/CurrentAccountProvider';
 import { shortAddress } from '../../../utils/ethereum';
 
 /**
@@ -12,7 +12,7 @@ const Header = () => {
         <div className="w-full">
             <div className="bg-teal-100">
                 <nav className="flex justify-between w-full bg-teal-600 text-white p-4">
-                    <span className="font-semibold text-xl tracking-tight">Account Abstruction Dapp</span>
+                    <span className="font-semibold text-xl tracking-tight">Okodukai Wallet</span>
                     <div className="flex text-sm" v-else>
                         {(currentAccount !== "" && currentAccount !== undefined)  ?
                             <button

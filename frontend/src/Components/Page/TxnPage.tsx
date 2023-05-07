@@ -15,8 +15,8 @@ const TxnPage = () => {
   return(
     <div className="App">
       <header className="App-header">
-        <h2 className='text-base'>factory address: {factoryAddress}</h2>
-        <h2 className='text-base mb-8'>contract address: {contractAddress}</h2>
+        <h2 className='text-base'>factory address: <a href={"https://mumbai.polygonscan.com/address/" + factoryAddress}>{factoryAddress}</a></h2>
+        <h2 className='text-base mb-8'>contract address: <a href={"https://mumbai.polygonscan.com/address/" + contractAddress}>{contractAddress}</a></h2>
         {isLoading ?
         <Spinner/>:(
           <div className='flex flex-row gap-16'>
