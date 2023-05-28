@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import address from "./address";
-import transfer from "./transfer";
-import erc20Transfer from "./erc20Transfer";
-import erc20Approve from "./erc20Approve";
 import batchErc20Transfer from "./batchErc20Transfer";
+import erc20Approve from "./erc20Approve";
+import erc20Transfer from "./erc20Transfer";
+import erc721Transfer from "./erc721Transfer";
+import transfer from "./transfer";
 
 const program = new Command();
 
@@ -89,6 +90,27 @@ program
   .requiredOption("-amt, --amount <decimal>", "Amount of the token to transfer")
   .action(async (opts) =>
     batchErc20Transfer(opts.token, opts.to.split(","), opts.amount, {
+      dryRun: Boolean(opts.dryRun),
+      withPM: Boolean(opts.withPaymaster),
+    })
+  );
+
+program
+  .command("erc721Transfer")
+  .description("Simple transfer ERC-721 token")
+  .option(
+    "-dr, --dryRun",
+    "Builds the UserOperation without calling eth_sendUserOperation"
+  )
+  .option("-pm, --withPaymaster", "Use a paymaster for this transaction")
+  .requiredOption("-tkn, --token <address>", "The token address")
+  .requiredOption(
+    "-t, --to <addresses>",
+    "Comma separated list of recipient addresses"
+  )
+  .requiredOption("-id, --tokenId <uint256>", "tokenId of the token to transfer")
+  .action(async (opts) =>
+    erc721Transfer(opts.token, opts.to, opts.tokenId, {
       dryRun: Boolean(opts.dryRun),
       withPM: Boolean(opts.withPaymaster),
     })
