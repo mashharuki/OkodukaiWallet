@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import { ethers } from 'ethers';
+import { useContext, useState } from "react";
 import CurrentAccountContext from '../../../context/CurrentAccountProvider';
-import { useContext } from "react";
 
 interface Props {
     address: string;
@@ -124,14 +123,14 @@ const SendModal = (props: Props) => {
                     </div>
                 </div>
             : 
-            <div className="w-full flex justify-center" id="button">
-                <button 
-                    className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out rounded-full px-4 sm:px-8 py-2 text-xs sm:text-sm"
-                    onClick={handleModal}
-                >
-                    Open Modal
-                </button>
-            </div>
+                <div className="w-full flex justify-center" id="button">
+                    <button 
+                        className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out rounded-full px-4 sm:px-8 py-2 text-xs sm:text-sm"
+                        onClick={handleModal}
+                    >
+                        Open Modal
+                    </button>
+                </div>
             }
         </>
     );

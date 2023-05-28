@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './../../App.css';
+import { useState } from 'react';
 import erc20Transfer from '../../scripts/simpleAccount/erc20Transfer';
 import { CLIOpts } from "../../utils/types";
+import './../../css/App.css';
 
 /**
  * ER20Transfer Component
@@ -13,8 +13,7 @@ const ERC20Transfer = (props:any) => {
 
     const {
         setIsLoading,
-        factoryAddress,
-        contractAddress,
+        factoryAddress
     } = props;
 
     const handleErc20Transfer = async () => {

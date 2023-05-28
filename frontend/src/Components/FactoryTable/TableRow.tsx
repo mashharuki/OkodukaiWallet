@@ -1,11 +1,12 @@
-import config from '../../config.json';
 import { ethers } from 'ethers';
-import { FactoryCreated } from '../../utils/types';
 import { useEffect, useState } from 'react';
-import { Presets } from 'userop';
-import { shortAddress } from '../../utils/ethereum';
-import SendModal from '../common/SendModal';
 import { Link } from 'react-router-dom';
+import { Presets } from 'userop';
+import config from '../../config.json';
+import { shortAddress } from '../../utils/ethereum';
+import { FactoryCreated } from '../../utils/types';
+import SendModal from '../common/SendModal';
+import { MUMBAI_RPC_URL, POLYGONSCAN_URL } from './../common/Contents';
 
 interface Props {
     factoryCreated: FactoryCreated;
@@ -19,7 +20,6 @@ const TableRow = (porps: Props) => {
     const [balance, setBalance] = useState('0');
 
     const factoryCreated = porps.factoryCreated;
-    const sliceFactoryAddress = (factoryCreated.factoryAddress).slice(0, 6) + '...';
 
     /**
      * コントラクトウォレットのアドレスを取得するためのメソッド
@@ -46,7 +46,7 @@ const TableRow = (porps: Props) => {
         const contractWalletAddress = await getAddress(factoryAddress);
 
         // 残高を取得する。
-        const provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com');
+        const provider = new ethers.providers.JsonRpcProvider(MUMBAI_RPC_URL);
         const getBalancePromise = await provider.getBalance(contractWalletAddress);
         console.log("balance:", getBalancePromise);
         const formatBalance = Number(ethers.utils.formatEther(getBalancePromise));
@@ -55,6 +55,9 @@ const TableRow = (porps: Props) => {
     }
 
     useEffect(() => { 
+        /**
+         * 初期化メソッド
+         */
         const init = async() => { 
             await getAddress(factoryCreated.factoryAddress);
             await getBalance(factoryCreated.factoryAddress);
@@ -64,9 +67,11 @@ const TableRow = (porps: Props) => {
 
     return (
         <tr key={factoryCreated.factoryId} className="border-b border-slate-300">
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{factoryCreated.factoryId}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                {factoryCreated.factoryId}
+            </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm underline underline-offset-4'>
-                <a href={"https://mumbai.polygonscan.com/address/" + factoryCreated.factoryAddress}>
+                <a href={POLYGONSCAN_URL + factoryCreated.factoryAddress}>
                     {shortAddress(factoryCreated.factoryAddress)}
                 </a>
             </td>
@@ -74,11 +79,13 @@ const TableRow = (porps: Props) => {
                 <Link to='/transfer' state={{
                     factoryAddress: factoryCreated.factoryAddress,
                     contractAddress: address
-                    }}>
+                }}>
                     {address}
                 </Link>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>{balance}</td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                {balance}
+            </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <SendModal address={address} />
             </td>

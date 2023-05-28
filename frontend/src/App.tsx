@@ -1,17 +1,16 @@
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import TxnPage from './Components/Page/TxnPage';
-import Home from './Components/Page/Home';
+import { GRAPHQL_API_ENDPOINT } from "./Components/common/Contents";
 import Header from './Components/common/Header';
+import Home from './Page/Home';
+import TxnPage from './Page/TxnPage';
 import { CurrentAccountProvider } from "./context/CurrentAccountProvider";
+import './css/App.css';
 
-// SubGraph用の API エンドポイント
-const API_URL = "https://api.studio.thegraph.com/query/44992/aa-factorymanager/v0.0.1";
 
 // create client
 const client = new Client({
-  url: API_URL,
+  url: GRAPHQL_API_ENDPOINT,
   exchanges: [cacheExchange, fetchExchange],
 });
 
@@ -36,9 +35,9 @@ function Root() {
     <CurrentAccountProvider>
       <Provider value={client}>
         <BrowserRouter>
-        <App/>
+          <App/>
         </BrowserRouter>
-    </Provider>
+      </Provider>
     </CurrentAccountProvider>
   );
 }

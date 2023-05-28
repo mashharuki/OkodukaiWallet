@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './../../App.css';
+import { useState } from 'react';
 import { transfer } from '../../scripts/simpleAccount/transfer';
 import { CLIOpts } from "../../utils/types";
+import './../../css/App.css';
 
 /**
  * Transfer Component

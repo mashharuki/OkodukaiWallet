@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Spinner from '../common/Spinner';
-import query from '../../graphql/query';
 import { useQuery } from 'urql';
-import FactoryTable from '../FactoryTable';
+import FactoryTable from '../Components/FactoryTable';
+import Spinner from '../Components/common/Spinner';
+import query from '../graphql/query';
 
 /**
  * App Component
@@ -20,11 +20,9 @@ function Home() {
       <header className="App-header">
         {isLoading ?
           <Spinner/>
-        : (
-          <>
-            {data !== undefined && <FactoryTable data={data} />}
-          </>
-        )}
+        : 
+          <>{data !== undefined && <FactoryTable data={data} />}</>
+        }
       </header>
     </div>
   );
