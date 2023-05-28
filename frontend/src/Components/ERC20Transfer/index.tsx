@@ -2,12 +2,13 @@ import { useState } from 'react';
 import erc20Transfer from '../../scripts/simpleAccount/erc20Transfer';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
+import { LINK_TOKEN_ADDRESS } from "./../common/Contents";
 
 /**
  * ER20Transfer Component
  */
 const ERC20Transfer = (props:any) => { 
-    const [tokenAddress, setTokenAddress] = useState('0x326C977E6efc84E512bB9C30f76E30c160eD06FB');
+    const [tokenAddress, setTokenAddress] = useState(LINK_TOKEN_ADDRESS);
     const [address, setAddress] = useState('');
     const [amount, setAmount] = useState('');
 
@@ -60,6 +61,7 @@ const ERC20Transfer = (props:any) => {
                 placeholder="Enter amount"
             />
             <button
+                className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
                 onClick={handleErc20Transfer}
             >
                 Transfer

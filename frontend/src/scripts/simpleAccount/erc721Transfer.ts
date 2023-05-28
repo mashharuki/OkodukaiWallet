@@ -9,7 +9,8 @@ export default async function erc721Transfer(
   tkn: string,
   t: string,
   id: string,
-  opts: CLIOpts
+  opts: CLIOpts,
+  factoryAddress: string,
 ) {
   const paymaster = opts.withPM
     ? Presets.Middleware.verifyingPaymaster(
@@ -21,7 +22,7 @@ export default async function erc721Transfer(
     config.signingKey,
     config.rpcUrl,
     config.entryPoint,
-    config.simpleAccountFactory,
+    factoryAddress,
     paymaster
   );
 

@@ -1,21 +1,26 @@
 import { useState } from 'react';
-import { transfer } from '../../scripts/simpleAccount/transfer';
+import erc721Transfer from '../../scripts/simpleAccount/erc721Transfer';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
+import { NFT_ADDRESS } from "./../common/Contents";
 
 /**
- * Transfer Component
+ * ERC721Transfer Component
  */
-const Transfer = (props:any) => { 
+const ERC721Transfer = (props:any) => { 
+    const [nftAddress, setNftAddress] = useState(NFT_ADDRESS);
     const [address, setAddress] = useState('');
-    const [amount, setAmount] = useState('');
+    const [tokenId, setTokenId] = useState('');
 
     const {
         setIsLoading,
         factoryAddress
     } = props;
 
-    const handleTransfer = async () => {
+    /**
+     * NFTをtransferするためのメソッド
+     */
+    const handleErc721Transfer = async () => {
         const opts: CLIOpts = {
             dryRun: false, // Set to true if you want to perform a dry run
             withPM: false, // Set to true if you want to use a paymaster
@@ -23,7 +28,8 @@ const Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
-            await transfer(address, amount, opts, factoryAddress);
+            // NFTをトランスファーする。
+            await erc721Transfer(nftAddress, address, tokenId, opts, factoryAddress);
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);
@@ -36,24 +42,31 @@ const Transfer = (props:any) => {
 
     return (
         <div className='px-6 py-6 bg-white rounded-md border-b border-gray-200'>
-            <h1 className='text-lg mb-4'>Let's transfer!!</h1>
+            <h1 className='text-lg mb-4'>Let's NFT transfer!!</h1>
+            <input
+                className='block'
+                type="text"
+                value={nftAddress}
+                onChange={(e) => setNftAddress(e.target.value)}
+                placeholder="Enter ERC20 Token address"
+            />
             <input
                 className='block'
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="Enter address"
+                placeholder="Enter to address"
             />
             <input
                 className='block'
                 type="text"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="Enter amount"
+                value={tokenId}
+                onChange={(e) => setTokenId(e.target.value)}
+                placeholder="Enter tokenID"
             />
-            <button 
+            <button
                 className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
-                onClick={handleTransfer}
+                onClick={handleErc721Transfer}
             >
                 Transfer
             </button>
@@ -61,4 +74,4 @@ const Transfer = (props:any) => {
     );
 }
 
-export default Transfer;
+export default ERC721Transfer;

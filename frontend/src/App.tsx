@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
 import { GRAPHQL_API_ENDPOINT } from "./Components/common/Contents";
+import Footer from './Components/common/Footer';
 import Header from './Components/common/Header';
 import Home from './Page/Home';
 import TxnPage from './Page/TxnPage';
@@ -26,6 +27,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/transfer' element={<TxnPage/>}/>
       </Routes>
+      <Footer/>
     </>
   )
 }

@@ -23,10 +23,11 @@ const FactoryTable = ({ data }:Props) => {
         )))
     }
         
-
     return (
         <>
-            <div className="mb-8">Deployed FactoryContract by FactoryManager</div>
+            <div className="mb-8">
+                Deployed FactoryContract by FactoryManager
+            </div>
             <table>
                 <thead>
                     <tr >

@@ -18,7 +18,7 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        {isLoading ?
+        {(isLoading ?? fetching) ?
           <Spinner/>
         : 
           <>{data !== undefined && <FactoryTable data={data} />}</>
