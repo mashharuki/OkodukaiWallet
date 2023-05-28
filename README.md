@@ -396,3 +396,4 @@ yarn run simpleAccount transfer --to 0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072 
 18. [tailwindcomponents](https://tailwindcomponents.com/component/bottom-and-header-nav-responsive)
 19. [Alchemy ERC20Token Balance](https://docs.alchemy.com/reference/alchemy-gettokenbalances)
 20. [NFT API Quickstart](https://docs.alchemy.com/reference/nft-api-quickstart)
+21. [How to get all ERC20 tokens owned by an address](https://docs.moralis.io/web3-data-api/evm/how-to-get-all-erc20-tokens-owned-by-an-address)

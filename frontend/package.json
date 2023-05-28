@@ -12,6 +12,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "alchemy-sdk": "^2.8.3",
     "autoprefixer": "^10.4.14",
     "commander": "^10.0.1",
     "dotenv": "^16.0.3",

@@ -1,9 +1,12 @@
 import { createContext, ReactNode } from "react";
 import { useWallet } from "../hooks/useWallet";
 
-const CurrentAccountContext = createContext<[string | undefined, () => void]>([
+const CurrentAccountContext = createContext<[
+    string | undefined, 
+    () => void
+]>([
   "",
-  () => {},
+  () => {}
 ]);
 
 /**
@@ -17,7 +20,7 @@ export const CurrentAccountProvider = ({
     children: ReactNode;
 }) => {
     const { currentAccount, connectWallet } = useWallet();
-
+ 
     return (
         <CurrentAccountContext.Provider 
             value={[currentAccount, connectWallet]}

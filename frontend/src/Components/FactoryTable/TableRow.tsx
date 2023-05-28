@@ -48,7 +48,7 @@ const TableRow = (porps: Props) => {
         // 残高を取得する。
         const provider = new ethers.providers.JsonRpcProvider(MUMBAI_RPC_URL);
         const getBalancePromise = await provider.getBalance(contractWalletAddress);
-        console.log("balance:", getBalancePromise);
+        // console.log("balance:", getBalancePromise);
         const formatBalance = Number(ethers.utils.formatEther(getBalancePromise));
         const balance = String(formatBalance.toFixed(3));
         setBalance(balance);

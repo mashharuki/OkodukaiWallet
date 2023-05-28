@@ -12,3 +12,5 @@ export const NFT_ADDRESS = "0xfe03B6a6B4B095248F06Ed9528e913995ED58f97";
 export const TWITTER_URL = "https://twitter.com/HARUKI05758694";
 // GitHub RUL
 export const GTITHUB_URL = "https://github.com/mashharuki/OkodukaiWallet";
+// ALCHEMY API URL (Mumbai Network)
+export const ALCHEMY_API_URL = "https://polygon-mumbai.g.alchemy.com/nft/v3/";
