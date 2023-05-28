@@ -19,7 +19,9 @@ export const CurrentAccountProvider = ({
     const { currentAccount, connectWallet } = useWallet();
 
     return (
-        <CurrentAccountContext.Provider value={[currentAccount, connectWallet]}>
+        <CurrentAccountContext.Provider 
+            value={[currentAccount, connectWallet]}
+        >
             {children}
         </CurrentAccountContext.Provider>
     );

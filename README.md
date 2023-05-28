@@ -394,3 +394,5 @@ yarn run simpleAccount transfer --to 0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072 
 16. [ERC4337 に関するメモ](https://scrapbox.io/m1dstream/EIP4337_%23Ethereum)
 17. [発表資料](https://www.canva.com/design/DAFiCy3VhsI/KAkcUxU8fNhlMjUkeU0_eA/edit?utm_content=DAFiCy3VhsI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 18. [tailwindcomponents](https://tailwindcomponents.com/component/bottom-and-header-nav-responsive)
+19. [Alchemy ERC20Token Balance](https://docs.alchemy.com/reference/alchemy-gettokenbalances)
+20. [NFT API Quickstart](https://docs.alchemy.com/reference/nft-api-quickstart)
