@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { transfer } from '../../scripts/simpleAccount/transfer';
+import { transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
 
@@ -23,6 +23,7 @@ const Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
+            // call transfer method
             await transfer(address, amount, opts, factoryAddress);
             alert('Transfer successful');
             console.log('Transfer successful');

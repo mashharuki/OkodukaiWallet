@@ -1,8 +1,7 @@
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Presets } from 'userop';
-import config from '../../config.json';
+import { getAddress } from '../../hooks/useUserOp';
 import { shortAddress } from '../../utils/ethereum';
 import { FactoryCreated } from '../../utils/types';
 import SendModal from '../common/SendModal';
@@ -11,6 +10,7 @@ import { MUMBAI_RPC_URL, POLYGONSCAN_URL } from './../common/Contents';
 interface Props {
     factoryCreated: FactoryCreated;
 }
+
 
 /**
  * tableRows
@@ -22,28 +22,12 @@ const TableRow = (porps: Props) => {
     const factoryCreated = porps.factoryCreated;
 
     /**
-     * コントラクトウォレットのアドレスを取得するためのメソッド
-     */
-    const getAddress = async (factoryAddress: string) => { 
-        // SimpleAccountオブジェクトを生成
-        const simpleAccount = await Presets.Builder.SimpleAccount.init(
-            config.signingKey,
-            config.rpcUrl,
-            config.entryPoint,
-            factoryAddress
-        );
-
-        setAddress(simpleAccount.getSender());
-        return simpleAccount.getSender();
-    };
-
-    /**
      * コントラクトウォレットの残高を取得するためのメソッド
      * @param factoryAddress
      */
-    const getBalance = async (factoryAddress: string) => { 
-        
+    const getBalance = async (factoryAddress: string) => {         
         const contractWalletAddress = await getAddress(factoryAddress);
+        setAddress(contractWalletAddress);
 
         // 残高を取得する。
         const provider = new ethers.providers.JsonRpcProvider(MUMBAI_RPC_URL);
@@ -60,6 +44,7 @@ const TableRow = (porps: Props) => {
          */
         const init = async() => { 
             await getAddress(factoryCreated.factoryAddress);
+
             await getBalance(factoryCreated.factoryAddress);
         };
         init();
