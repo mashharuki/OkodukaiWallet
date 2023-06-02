@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sendNotifications } from '../../hooks/usePush';
 import { erc20Transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
@@ -25,7 +26,17 @@ const ERC20Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
-            await erc20Transfer(tokenAddress, address, amount, opts, factoryAddress);
+            await erc20Transfer(
+                tokenAddress, 
+                address, 
+                amount, 
+                opts, 
+                factoryAddress
+            ).then(async() => {
+                // send notifications
+                await sendNotifications(address);
+            });
+            
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sendNotifications } from '../../hooks/usePush';
 import { erc721Transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
@@ -29,7 +30,16 @@ const ERC721Transfer = (props:any) => {
         try {
             setIsLoading(true);
             // NFTをトランスファーする。
-            await erc721Transfer(nftAddress, address, tokenId, opts, factoryAddress);
+            await erc721Transfer(
+                nftAddress, 
+                address, 
+                tokenId, 
+                opts, 
+                factoryAddress
+            ).then(async() => {
+                // send notifications
+                await sendNotifications(address);
+            });;
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);

@@ -1,3 +1,4 @@
+import * as PushAPI from '@pushprotocol/restapi';
 import { useEffect, useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
 import ERC20Transfer from "../Components/ERC20Transfer";
@@ -6,6 +7,7 @@ import ERC20Table from "../Components/TokenTable/ERC20Table";
 import NftTable from "../Components/TokenTable/NftTable";
 import Transfer from "../Components/Transfer";
 import Spinner from "../Components/common/Spinner";
+import { loadNotifications } from "../hooks/usePush";
 import { createAlchemy } from "../utils/alchemy";
 import { POLYGONSCAN_URL } from "./../Components/common/Contents";
 
@@ -19,6 +21,7 @@ const TxnPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [tokens, setTokens] = useState<any[]>([]);
   const [nfts, setNfts] = useState<any[]>([]);
+  const [spams, setSpams] = useState<PushAPI.ParsedResponseType[]>([])
 
   
   const location = useLocation();
@@ -38,6 +41,11 @@ const TxnPage = () => {
         console.log("result:", res.tokenBalances);
         setTokens(res.tokenBalances);
       });
+
+      // get notifications
+      const notifications = await loadNotifications(false, contractAddress);
+      setSpams(notifications);
+      console.log("spams:", notifications)
 
       setIsLoading(false);
     };

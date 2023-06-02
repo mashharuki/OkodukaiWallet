@@ -1,5 +1,10 @@
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import { JsonRpcConnection } from "@metamask/providers/dist/StreamProvider";
+import { ethers } from "ethers";
+
+const {
+  REACT_APP_CONNECT_ADDRESS_PRIVATE_KEY,
+  REACT_APP_SIGNING_KEY
+} = process.env;
 
 declare global {
   interface Window {
@@ -20,9 +25,9 @@ export const getEthereum = (): MetaMaskInpageProvider | null => {
 };
 
 /**
-     * コントラクトアドレスを短くするためのメソッド
-     * @param address 接続したウォレットのアドレス
-     */
+ * get shortAddress
+ * @param address wallet address
+ */
 export const shortAddress = (address:any) => {
   if (address.length <= 8) {
       return address;
@@ -31,4 +36,12 @@ export const shortAddress = (address:any) => {
       const lastThree = address.substring(address.length - 4);
       return `${firstThree}...${lastThree}`;
   }
+};
+
+/**
+ * getSinger Object
+ */
+export const getSigner = ():any => {
+  const signer = new ethers.Wallet(REACT_APP_CONNECT_ADDRESS_PRIVATE_KEY!);
+  return signer;
 };

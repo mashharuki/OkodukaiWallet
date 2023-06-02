@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sendNotifications } from '../../hooks/usePush';
 import { transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
@@ -24,7 +25,16 @@ const Transfer = (props:any) => {
         try {
             setIsLoading(true);
             // call transfer method
-            await transfer(address, amount, opts, factoryAddress);
+            await transfer(
+                address, 
+                amount, 
+                opts, 
+                factoryAddress
+            ).then(async() => {
+                // send notifications
+                await sendNotifications(address);
+            });
+            
             alert('Transfer successful');
             console.log('Transfer successful');
             setIsLoading(false);

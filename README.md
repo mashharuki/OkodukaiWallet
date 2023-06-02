@@ -10,6 +10,27 @@ Okodukai Wallet (React.js + Hardhat + TheGraph)
 | 2   | EntryPoint       | [0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789](https://mumbai.polygonscan.com/address/0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789#code) | Mumbai       |
 | 3   | DepositPaymaster | [0x93fdd51462FB20fB631F8CA38c3DeB87583311Ea](https://mumbai.polygonscan.com/address/0x93fdd51462FB20fB631F8CA38c3DeB87583311Ea#code) | Mumbai       |
 
+## Teckstack
+
+| No. | Name                |
+| :-- | :------------------ |
+| 1   | React.js            |
+| 2   | Tailwind CSS        |
+| 3   | ERC4337             |
+| 4   | ERC20               |
+| 5   | The Graph           |
+| 6   | hardhat             |
+| 8   | TypeScript          |
+| 9   | ERC4337             |
+| 10  | Account Abstraction |
+| 11  | Push Protocol SDK   |
+| 12  | openzeppelin        |
+| 13  | ethers.js           |
+| 14  | userOp.js           |
+| 15  |                     |
+| 16  |                     |
+| 17  |                     |
+
 ## Deployed Subgraph
 
 [SubGraph](https://api.studio.thegraph.com/query/44992/aa-factorymanager/v0.0.1)
@@ -369,6 +390,16 @@ yarn run simpleAccount transfer --to 0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072 
 - 標準仕様で、`userOp.js`を使って`React.js`などで開発したフロントエンドリクエストを投げられる様にすること。
 - まずは上記でフロントから動かすこと。(普通にライブラリを使ってリクエストを投げる。)
 - 独自実装を組み込んだ`FactoryContract`及び`AccountContract`のデプロイ方法と適用方法を調べること。
+
+### 追加で実装できそうな機能
+
+- Push Protocol を使って送信相手にメッセージを送る。(チャットとして確認できる。)
+- 分散型 DB を使って、トランザクション履歴と認証機能をくっ付けられそう
+- fizzion に展開できそう。
+- Fevm 上で erc4337 を動かすようにしたら面白そう・・。
+- ENS 的な要素をくっつける + 認証機能? (ウォレットアドレス・ID・パスワードを設定する。)
+- ODD SDK が使えそう？？ パスワードレスで認証 ウォレットアドレスと DID を紐づけておいてあげればよさそう。
+- ウォレットを生成したら登録してあげればパスワードレスでできそう・・！ Polybase
 
 ### Paymaster で使えるトークンについて
 
