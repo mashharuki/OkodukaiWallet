@@ -9,6 +9,9 @@ import SendModal from '../common/SendModal';
 
 interface Props {
     factoryCreated: FactoryCreated;
+    setIsLoading: (arg0: boolean) => void;
+    currentAddress: string;
+    addStake: (arg0: string, arg1: string) => void;
 }
 
 
@@ -20,9 +23,13 @@ const TableRow = (porps: Props) => {
     const [balance, setBalance] = useState('0');
 
     const factoryCreated = porps.factoryCreated;
+    const setIsLoading = porps.setIsLoading;
+    const currentAddress = porps.currentAddress;
+    const addStake = porps.addStake;
+
 
     /**
-     * コントラクトウォレットの残高を取得するためのメソッド
+     * get ContractWallet's balance method
      * @param factoryAddress
      */
     const getBalance = async (factoryAddress: string) => {         
@@ -37,6 +44,22 @@ const TableRow = (porps: Props) => {
         const balance = String(formatBalance.toFixed(3));
         setBalance(balance);
     }
+
+    /**
+     * addStake method
+     */
+    const addStakeETH = async () => {
+        try {
+            setIsLoading(true);
+            await addStake(currentAddress, factoryCreated.factoryAddress);
+            alert('send sucess!!!');
+            setIsLoading(false);
+        } catch(err) {
+            console.log("err:", err);
+            alert('send fail....');
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => { 
         /**
@@ -71,7 +94,15 @@ const TableRow = (porps: Props) => {
                 {balance}
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                <SendModal address={address} />
+                <SendModal address={address} setIsLoading={setIsLoading} />
+            </td>
+            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm' >
+                <button 
+                    className="bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out rounded-full px-4 sm:px-8 py-2 text-xs sm:text-sm"
+                    onClick={addStakeETH}
+                >
+                    add stake
+                </button>
             </td>
         </tr>
     )

@@ -4,6 +4,7 @@ import CurrentAccountContext from '../../../context/CurrentAccountProvider';
 
 interface Props {
     address: string;
+    setIsLoading: (arg0: boolean) => void;
 }
 
 /**
@@ -15,7 +16,8 @@ const SendModal = (props: Props) => {
     const [currentAccount, connectWallet, sendETH] = useContext(CurrentAccountContext);
 
     const { 
-        address 
+        address,
+        setIsLoading
     } = props;
 
     /**
@@ -23,6 +25,15 @@ const SendModal = (props: Props) => {
      */
     const handleModal = () => {
         setShowModal(!showModal);
+    }
+
+    /**
+     * send method
+     */
+    const send = async() => {
+        setIsLoading(true);
+        await sendETH(value, address);
+        setIsLoading(false);
     }
 
     return (
@@ -72,7 +83,7 @@ const SendModal = (props: Props) => {
                             <div className="flex items-center justify-start w-full">
                                 <button 
                                     className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
-                                    onClick={() => sendETH(value, address)}
+                                    onClick={send}
                                 >
                                     Deposit
                                 </button>

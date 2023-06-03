@@ -5,6 +5,7 @@ import { FACTORY_MANAGER_ADDRESS } from './../utils/Contents';
 
 type ReturnUseContract = {
   createNewFactory: (currentAccount: string) => void;
+  addStake: (currentAccount: string, factoryAddress: string) => void;
 };
 
 /**
@@ -59,12 +60,20 @@ export const useContract = (): ReturnUseContract => {
   /**
    * add Stake method
    */
-  const createAddStake = async() => {
-
+  const addStake = async(currentAccount: string, factoryAddress: string) => {
+    // create contract
+    const factory = createContract(currentAccount, FACTORY_MANAGER_ADDRESS, FactoryManagerJson.abi);
+    // create new factory
+    const txn = await factory?.addStake(factoryAddress, 100000, {
+      value: ethers.utils.parseEther("0.1")._hex,
+    });
+    console.log("txn:", txn);
+    await txn.wait();
   };
 
   return {
-    createNewFactory
+    createNewFactory,
+    addStake
   };
 };
 

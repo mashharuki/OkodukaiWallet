@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery } from 'urql';
 import FactoryTable from '../Components/FactoryTable';
 import Spinner from '../Components/common/Spinner';
@@ -8,6 +9,7 @@ import query from '../graphql/query';
  * @returns 
  */
 function Home() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   // execute query
   const [result] = useQuery({ query });
   const { data, fetching, error } = result;
@@ -18,7 +20,13 @@ function Home() {
         {fetching ?
           <Spinner/>
         : 
-          <>{data !== undefined && <FactoryTable data={data} />}</>
+          <>
+            {isLoading ? 
+              <Spinner/>
+            :
+              <>{data !== undefined && <FactoryTable data={data} setIsLoading={setIsLoading} />}</>
+            }
+          </>
         }
       </header>
     </div>
