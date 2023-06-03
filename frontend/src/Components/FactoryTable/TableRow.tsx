@@ -2,10 +2,10 @@ import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAddress } from '../../hooks/useUserOp';
+import { MUMBAI_RPC_URL, POLYGONSCAN_URL } from '../../utils/Contents';
 import { shortAddress } from '../../utils/ethereum';
 import { FactoryCreated } from '../../utils/types';
 import SendModal from '../common/SendModal';
-import { MUMBAI_RPC_URL, POLYGONSCAN_URL } from './../common/Contents';
 
 interface Props {
     factoryCreated: FactoryCreated;

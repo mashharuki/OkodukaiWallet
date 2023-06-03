@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { POLYGONSCAN_URL } from "../../../utils/Contents";
 import { createAlchemy } from "../../../utils/alchemy";
-import { POLYGONSCAN_URL } from "./../../common/Contents";
 
 interface Props {
   token: any;

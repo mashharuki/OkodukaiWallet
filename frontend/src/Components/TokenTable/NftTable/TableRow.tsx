@@ -1,4 +1,4 @@
-import { POLYGONSCAN_URL } from "./../../common/Contents";
+import { POLYGONSCAN_URL } from "../../../utils/Contents";
 
 interface Props {
   nft: any;

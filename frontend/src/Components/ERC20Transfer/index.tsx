@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { sendNotifications } from '../../hooks/usePush';
 import { erc20Transfer } from '../../hooks/useUserOp';
+import { LINK_TOKEN_ADDRESS } from "../../utils/Contents";
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
-import { LINK_TOKEN_ADDRESS } from "./../common/Contents";
 
 /**
  * ER20Transfer Component

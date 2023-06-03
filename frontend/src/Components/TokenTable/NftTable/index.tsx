@@ -25,18 +25,20 @@ const NftTable = (props :Props) => {
       <div className="mb-4">
         NFT Balance
       </div>
-      <table>
-        <thead>
-          <tr >
-            <th className='px-5 py-3 border-b-2 border-gray-200 bg-teal-600 text-center text-xs font-semibold text-white uppercase tracking-wider'>Address</th>
-            <th className='px-5 py-3 border-b-2 border-gray-200 bg-teal-600 text-center text-xs font-semibold text-white uppercase tracking-wider'>Name</th>
-            <th className='px-5 py-3 border-b-2 border-gray-200 bg-teal-600 text-center text-xs font-semibold text-white uppercase tracking-wider'>Token Id</th>
-          </tr>
-        </thead>
-        <tbody>
-          {TableRows()}
-        </tbody>
-      </table>
+      <div className="flex justify-center">
+        <table>
+          <thead>
+            <tr >
+              <th className='px-5 py-3 border-b-2 border-gray-200 bg-teal-600 text-center text-xs font-semibold text-white uppercase tracking-wider'>Address</th>
+              <th className='px-5 py-3 border-b-2 border-gray-200 bg-teal-600 text-center text-xs font-semibold text-white uppercase tracking-wider'>Name</th>
+              <th className='px-5 py-3 border-b-2 border-gray-200 bg-teal-600 text-center text-xs font-semibold text-white uppercase tracking-wider'>Token Id</th>
+            </tr>
+          </thead>
+          <tbody>
+            {TableRows()}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

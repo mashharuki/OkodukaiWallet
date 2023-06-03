@@ -1,4 +1,4 @@
-import { GTITHUB_URL, TWITTER_URL } from "../Contents";
+import { GTITHUB_URL, TWITTER_URL } from "../../../utils/Contents";
 
 /**
  * Footer Component

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { sendNotifications } from '../../hooks/usePush';
 import { erc721Transfer } from '../../hooks/useUserOp';
+import { NFT_ADDRESS } from "../../utils/Contents";
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
-import { NFT_ADDRESS } from "./../common/Contents";
 
 /**
  * ERC721Transfer Component
