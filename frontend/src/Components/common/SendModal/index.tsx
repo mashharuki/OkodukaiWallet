@@ -1,4 +1,3 @@
-import { ethers } from 'ethers';
 import QRCode from 'qrcode.react';
 import { useContext, useState } from "react";
 import CurrentAccountContext from '../../../context/CurrentAccountProvider';
@@ -13,7 +12,7 @@ interface Props {
 const SendModal = (props: Props) => {
     const [showModal, setShowModal] = useState(false);
     const [value, setValue] = useState(0);
-    const [currentAccount] = useContext(CurrentAccountContext);
+    const [currentAccount, connectWallet, sendETH] = useContext(CurrentAccountContext);
 
     const { 
         address 
@@ -24,43 +23,6 @@ const SendModal = (props: Props) => {
      */
     const handleModal = () => {
         setShowModal(!showModal);
-    }
-
-    /**
-     * ネイティブトークンを送金するためのメソッド
-     */
-    const send = async() => {
-        
-        if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-            const { ethereum } = window;
-
-            if (!ethereum) {
-                console.log("Ethereum object doesn't exist!");
-                return;
-            }
-            
-            try {
-                console.log(`value:${value}`)
-
-                const transactionObject: any = {
-                    to: address,
-                    value: ethers.utils.parseEther(value.toString())._hex,
-                    from: currentAccount
-                };
-
-                console.log(`tx info:${JSON.stringify(transactionObject)}`)
-
-                await ethereum.request({
-                    method: "eth_sendTransaction",
-                    params: [transactionObject],
-                });
-
-                alert('send sucess!!!');
-            } catch (e){
-                alert('send fail...');
-                console.log(`err: ${e}`);
-            }
-        }
     }
 
     return (
@@ -110,7 +72,7 @@ const SendModal = (props: Props) => {
                             <div className="flex items-center justify-start w-full">
                                 <button 
                                     className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
-                                    onClick={send}
+                                    onClick={() => sendETH(value, address)}
                                 >
                                     Deposit
                                 </button>

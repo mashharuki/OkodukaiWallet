@@ -1,18 +1,22 @@
+import { useContext } from "react";
+import ContractContext from '../../context/ContractProvider';
+import CurrentAccountContent from "./../../context/CurrentAccountProvider";
 import { FactoryCreated } from './../../utils/types';
 import TableRow from './TableRow';
-
 
 interface Props {
   data: { factoryCreateds: FactoryCreated[] };
 }
 
 /**
-   * GraphQLで取得した結果を表形式で出力するためのコンポーネント
-   * @param data データ
-   */
+ * GraphQLで取得した結果を表形式で出力するためのコンポーネント
+ * @param data データ
+ */
 const FactoryTable = ({ data }:Props) => {
 
     const { factoryCreateds } = data;
+    const [currentAccount] = useContext(CurrentAccountContent);
+    const [createNewFactory] = useContext(ContractContext);
 
     /**
      * tableRows
@@ -42,6 +46,14 @@ const FactoryTable = ({ data }:Props) => {
                     {TableRows()}
                 </tbody>
             </table>
+            <div className="m-4">
+                <button 
+                    className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                    onClick={async() => await createNewFactory(currentAccount!)}
+                >
+                    Create New Factory
+                </button>
+            </div>
         </>
     );
 }

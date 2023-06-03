@@ -1,9 +1,11 @@
+import { ethers } from 'ethers';
 import { useCallback, useEffect, useState } from "react";
 import { getEthereum } from "../utils/ethereum";
 
 type ReturnUseWallet = {
     currentAccount: string | undefined;
     connectWallet: () => void;
+    sendETH: (value: number, address: string) => void;
 };
 
 /**
@@ -62,6 +64,44 @@ export const useWallet = (): ReturnUseWallet => {
         }
     }, [ethereum]);
 
+    /**
+     * send NativeToken method
+     * @param value value
+     * @param address to address
+     */
+    const sendETH = async(value: number, address: string) => {
+        if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
+            const { ethereum } = window;
+
+            if (!ethereum) {
+                console.log("Ethereum object doesn't exist!");
+                return;
+            }
+            
+            try {
+                console.log(`value:${value}`)
+
+                const transactionObject: any = {
+                    to: address,
+                    value: ethers.utils.parseEther(value.toString())._hex,
+                    from: currentAccount
+                };
+
+                console.log(`tx info:${JSON.stringify(transactionObject)}`)
+
+                await ethereum.request({
+                    method: "eth_sendTransaction",
+                    params: [transactionObject],
+                });
+
+                alert('send sucess!!!');
+            } catch (e){
+                alert('send fail...');
+                console.log(`err: ${e}`);
+            }
+        }
+    };
+
     useEffect(() => {
         checkIfWalletIsConnected();
     }, [checkIfWalletIsConnected]);
@@ -69,5 +109,6 @@ export const useWallet = (): ReturnUseWallet => {
     return {
         currentAccount,
         connectWallet,
+        sendETH,
     };
 };

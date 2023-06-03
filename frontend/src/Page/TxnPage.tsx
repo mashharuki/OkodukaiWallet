@@ -71,6 +71,9 @@ const TxnPage = () => {
               </div>
             ): (
               <div>
+                <div className="mb-4">
+                  My Assets
+                </div>
                 <h2 className='text-base'>
                   factory address: 
                   <a href={POLYGONSCAN_URL + factoryAddress}>

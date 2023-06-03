@@ -44,7 +44,6 @@ const TableRow = (porps: Props) => {
          */
         const init = async() => { 
             await getAddress(factoryCreated.factoryAddress);
-
             await getBalance(factoryCreated.factoryAddress);
         };
         init();

@@ -1,0 +1,87 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "TestUtil",
+  "sourceName": "contracts/test/TestUtil.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "initCode",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes",
+              "name": "callData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "callGasLimit",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "verificationGasLimit",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "preVerificationGas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxFeePerGas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maxPriorityFeePerGas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "paymasterAndData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct UserOperation",
+          "name": "op",
+          "type": "tuple"
+        }
+      ],
+      "name": "packUserOp",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506102ae806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80633a24dea414610030575b600080fd5b61004361003e36600461015d565b610059565b60405161005091906101a0565b60405180910390f35b60606100648261006a565b92915050565b606081356020830135600061008a610085604087018761020c565b61014a565b9050600061009e610085606088018861020c565b9050608086013560a087013560c088013560e08901356101008a013560006100cd6100856101208e018e61020c565b6040805173ffffffffffffffffffffffffffffffffffffffff9c909c1660208d01528b81019a909a5260608b019890985250608089019590955260a088019390935260c087019190915260e08601526101008501526101208401526101408084019190915281518084039091018152610160909201905292915050565b6000604051828085833790209392505050565b60006020828403121561016f57600080fd5b813567ffffffffffffffff81111561018657600080fd5b8201610160818503121561019957600080fd5b9392505050565b600060208083528351808285015260005b818110156101cd578581018301518582016040015282016101b1565b5060006040828601015260407fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8301168501019250505092915050565b60008083357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe184360301811261024157600080fd5b83018035915067ffffffffffffffff82111561025c57600080fd5b60200191503681900382131561027157600080fd5b925092905056fea2646970667358221220c62c2141fb78ddb6c3e631efb6efd6c63db35e8b1e5c9c1f6e224160cc8e421964736f6c63430008120033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c80633a24dea414610030575b600080fd5b61004361003e36600461015d565b610059565b60405161005091906101a0565b60405180910390f35b60606100648261006a565b92915050565b606081356020830135600061008a610085604087018761020c565b61014a565b9050600061009e610085606088018861020c565b9050608086013560a087013560c088013560e08901356101008a013560006100cd6100856101208e018e61020c565b6040805173ffffffffffffffffffffffffffffffffffffffff9c909c1660208d01528b81019a909a5260608b019890985250608089019590955260a088019390935260c087019190915260e08601526101008501526101208401526101408084019190915281518084039091018152610160909201905292915050565b6000604051828085833790209392505050565b60006020828403121561016f57600080fd5b813567ffffffffffffffff81111561018657600080fd5b8201610160818503121561019957600080fd5b9392505050565b600060208083528351808285015260005b818110156101cd578581018301518582016040015282016101b1565b5060006040828601015260407fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8301168501019250505092915050565b60008083357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe184360301811261024157600080fd5b83018035915067ffffffffffffffff82111561025c57600080fd5b60200191503681900382131561027157600080fd5b925092905056fea2646970667358221220c62c2141fb78ddb6c3e631efb6efd6c63db35e8b1e5c9c1f6e224160cc8e421964736f6c63430008120033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

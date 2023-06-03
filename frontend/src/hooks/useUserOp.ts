@@ -52,10 +52,7 @@ export async function getAddress(
     REACT_APP_ENTRY_POINT_ADDRESS,
     factoryAddress,
   );
-  console.log(`SimpleAccount: ${simpleAccount}`);
   const address = simpleAccount.getSender();
-
-  console.log(`SimpleAccount address: ${address}`);
   return address;
 }
 

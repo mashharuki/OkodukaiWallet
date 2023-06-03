@@ -32,8 +32,11 @@ const SliderBar = ({ setNotificateFlg, spams }:ChildProps) => {
                             <span className="mx-4 text-lg font-normal">
                                 Notificatios
                             </span>
-                            <span className="flex-grow text-right">
-                                <button type="button" className="w-6 h-6 text-xs rounded-full text-white bg-red-500">
+                            <span className="flex text-right">
+                                <button 
+                                    type="button" 
+                                    className="w-6 h-6 text-xs rounded-full text-white bg-red-500"
+                                >
                                     <span className="p-2">
                                         {spams}
                                     </span>
