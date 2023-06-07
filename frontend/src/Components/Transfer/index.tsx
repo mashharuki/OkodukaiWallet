@@ -1,8 +1,11 @@
+import { usePolybase } from "@polybase/react";
 import { useState } from 'react';
 import { sendNotifications } from '../../hooks/usePush';
-import { transfer } from '../../hooks/useUserOp';
+import { getAddress, transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
+import { DB_COLLECTION_NAME } from './../../utils/Contents';
+import { getCurrentTime } from './../../utils/date';
 
 /**
  * Transfer Component
@@ -10,6 +13,8 @@ import './../../css/App.css';
 const Transfer = (props:any) => { 
     const [address, setAddress] = useState('');
     const [amount, setAmount] = useState('');
+
+    const polybase = usePolybase();
 
     const {
         setIsLoading,
@@ -21,7 +26,10 @@ const Transfer = (props:any) => {
             dryRun: false, // Set to true if you want to perform a dry run
             withPM: false, // Set to true if you want to use a paymaster
         };
-    
+        
+        // get sender address
+        const sender = await getAddress(factoryAddress);
+
         try {
             setIsLoading(true);
             // call transfer method
@@ -33,6 +41,21 @@ const Transfer = (props:any) => {
             ).then(async() => {
                 // send notifications
                 await sendNotifications(address);
+                const currentTime = getCurrentTime();
+                
+                // data insert to Polybase DB
+                await polybase
+                    .collection(DB_COLLECTION_NAME)
+                    .create([
+                        sender,
+                        "Native",
+                        "0x0",
+                        address,
+                        amount,
+                        factoryAddress,
+                        "sccess",
+                        currentTime
+                    ]); 
             });
             
             alert('Transfer successful');
@@ -40,8 +63,25 @@ const Transfer = (props:any) => {
             setIsLoading(false);
         } catch (err) {
             console.error('Transfer failed', err);
+            const currentTime = getCurrentTime();
+                
+            // data insert to Polybase DB
+            await polybase
+                .collection(DB_COLLECTION_NAME)
+                .create([
+                    sender,
+                    "Native",
+                    "0x0",
+                    address,
+                    amount,
+                    factoryAddress,
+                    "fail",
+                    currentTime
+                ]); 
+
             alert('Transfer failed');
             setIsLoading(false);
+
         }
     };
 

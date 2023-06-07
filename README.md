@@ -400,6 +400,7 @@ yarn run simpleAccount transfer --to 0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072 
 - ENS 的な要素をくっつける + 認証機能? (ウォレットアドレス・ID・パスワードを設定する。)
 - ODD SDK が使えそう？？ パスワードレスで認証 ウォレットアドレスと DID を紐づけておいてあげればよさそう。
 - ウォレットを生成したら登録してあげればパスワードレスでできそう・・！ Polybase
+- AA の鍵をシャミアの秘密分散 + filecoin + 暗号化でどうか？
 
 ### Paymaster で使えるトークンについて
 

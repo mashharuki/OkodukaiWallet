@@ -16,3 +16,7 @@ export const GTITHUB_URL = "https://github.com/mashharuki/OkodukaiWallet";
 export const ALCHEMY_API_URL = "https://polygon-mumbai.g.alchemy.com/nft/v3/";
 // Factory Manager Contract Address
 export const FACTORY_MANAGER_ADDRESS = "0xdd0412fDdD27bd54115E63E62f04318C4B4154F4";
+// DB namespace
+export const DB_NAME_SPACE = "okozukai-mashharuki";
+// Polybase Collection NAME
+export const DB_COLLECTION_NAME = "OkozukaiDB"
