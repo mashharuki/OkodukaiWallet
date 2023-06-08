@@ -1,5 +1,6 @@
 import { usePolybase } from "@polybase/react";
 import { useState } from 'react';
+import { sendNotifications } from "../../hooks/usePush";
 import { getAddress, transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
@@ -40,7 +41,7 @@ const Transfer = (props:any) => {
                 factoryAddress
             ).then(async(res) => {
                 // send notifications
-                //await sendNotifications(address);
+                await sendNotifications(address);
                 const currentTime = getCurrentTime();
                 
                 // data insert to Polybase DB
