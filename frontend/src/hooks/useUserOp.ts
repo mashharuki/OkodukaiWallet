@@ -68,7 +68,7 @@ export async function transfer(
   amt: string, 
   opts: CLIOpts, 
   factoryAddress: string
-) {
+): Promise<string> {
   // get simpleAccount object
   const simpleAccount = await createSimpleAccountObject(factoryAddress, opts);
   const client = await Client.init(REACT_APP_BUNDLER_RPC_URL, REACT_APP_ENTRY_POINT_ADDRESS);
@@ -88,6 +88,8 @@ export async function transfer(
   console.log("Waiting for transaction...");
   const ev = await res.wait();
   console.log(`Transaction hash: ${ev?.transactionHash ?? null}`);
+
+  return ev?.transactionHash!;
 }
 
 /**
@@ -104,7 +106,7 @@ export async function erc20Transfer(
   amt: string,
   opts: CLIOpts,
   factoryAddress: string,
-) {
+): Promise<string> {
   // get simpleAccount object
   const simpleAccount = await createSimpleAccountObject(factoryAddress, opts);
   const client = await Client.init(REACT_APP_BUNDLER_RPC_URL, REACT_APP_ENTRY_POINT_ADDRESS);
@@ -138,6 +140,8 @@ export async function erc20Transfer(
   console.log("Waiting for transaction...");
   const ev = await res.wait();
   console.log(`Transaction hash: ${ev?.transactionHash ?? null}`);
+
+  return ev?.transactionHash!;
 }
 
 /**
@@ -154,7 +158,7 @@ export async function erc20Approve(
   amt: string,
   opts: CLIOpts,
   factoryAddress: string,
-) {
+): Promise<string>  {
   // get simpleAccount object
   const simpleAccount = await createSimpleAccountObject(factoryAddress, opts);
   const client = await Client.init(REACT_APP_BUNDLER_RPC_URL, REACT_APP_ENTRY_POINT_ADDRESS);
@@ -189,6 +193,8 @@ export async function erc20Approve(
   console.log("Waiting for transaction...");
   const ev = await res.wait();
   console.log(`Transaction hash: ${ev?.transactionHash ?? null}`);
+
+  return ev?.transactionHash!;
 }
 
 /**
@@ -267,7 +273,7 @@ export async function erc721Transfer(
   id: string,
   opts: CLIOpts,
   factoryAddress: string,
-) {
+): Promise<string> {
   // get simpleAccount object
   const simpleAccount = await createSimpleAccountObject(factoryAddress, opts);
   const client = await Client.init(REACT_APP_BUNDLER_RPC_URL, REACT_APP_ENTRY_POINT_ADDRESS);
@@ -305,5 +311,7 @@ export async function erc721Transfer(
   console.log("Waiting for transaction...");
   const ev = await res.wait();
   console.log(`Transaction hash: ${ev?.transactionHash ?? null}`);
+
+  return ev?.transactionHash!;
 }
 

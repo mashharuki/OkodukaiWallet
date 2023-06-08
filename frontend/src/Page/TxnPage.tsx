@@ -1,3 +1,4 @@
+import { usePolybase } from "@polybase/react";
 import * as PushAPI from '@pushprotocol/restapi';
 import { useEffect, useState } from "react";
 import { Link, useLocation } from 'react-router-dom';
@@ -7,11 +8,13 @@ import Notifications from '../Components/Notifications';
 import ERC20Table from "../Components/TokenTable/ERC20Table";
 import NftTable from "../Components/TokenTable/NftTable";
 import Transfer from "../Components/Transfer";
+import TxTable from '../Components/TxTable';
 import SliderBar from '../Components/common/Slidebar';
 import Spinner from "../Components/common/Spinner";
 import { loadNotifications } from "../hooks/usePush";
 import { POLYGONSCAN_URL } from "../utils/Contents";
 import { createAlchemy } from "../utils/alchemy";
+import { DB_COLLECTION_NAME } from './../utils/Contents';
 
 const alchemy = createAlchemy();
 
@@ -24,11 +27,16 @@ const TxnPage = () => {
   const [tokens, setTokens] = useState<any[]>([]);
   const [nfts, setNfts] = useState<any[]>([]);
   const [spams, setSpams] = useState<PushAPI.ParsedResponseType[]>([]);
+  const [txs, setTxs] = useState<any[]>([]);
   const [notificateFlg, setNotificateFlg] = useState(false);
+  const [txFlg, setTxFlg] = useState(false);
 
+  // Polybase config
+  const polybase = usePolybase();
   const location = useLocation();
   const factoryAddress = location.state.factoryAddress;
   const contractAddress = location.state.contractAddress;
+
 
   useEffect(() => {
     const init = async() => {
@@ -40,15 +48,22 @@ const TxnPage = () => {
       });
       // get own's ERC20 token
       await alchemy.core.getTokenBalances(contractAddress).then((res:any) => {
-        console.log("result:", res.tokenBalances);
         setTokens(res.tokenBalances);
       });
 
       // get notifications
       const notifications = await loadNotifications(false, contractAddress);
       setSpams(notifications);
-      console.log("spams:", notifications)
+      console.log("spams:", notifications);
 
+      var res = await polybase.collection(`${DB_COLLECTION_NAME}`)
+                          .where("sender", "==", `${contractAddress}`)
+                          .sort("date", "desc")
+                          .get();
+
+      console.log("txs:", res.data);
+      
+      setTxs(res.data);
       setIsLoading(false);
     };
     init();
@@ -63,13 +78,21 @@ const TxnPage = () => {
           <div className='flex flex-row'>
             <SliderBar 
               setNotificateFlg={setNotificateFlg} 
-              spams={spams.length}
+              setTxFlg={setTxFlg} 
+              spams={spams !== undefined ? spams.length : 0}
+              txs={txs !== undefined ? txs.length : 0}
             />
-            {notificateFlg ? (
+            {notificateFlg && (
               <div>
-              <Notifications spams={spams} />
+                <Notifications spams={spams} />
               </div>
-            ): (
+            )}
+            {txFlg && (
+              <div>
+                <>{txs !== undefined && <TxTable txs={txs} />}</>
+              </div>
+            )}  
+            {(!notificateFlg && !txFlg ) && (
               <div>
                 <div className="mb-4">
                   My Assets

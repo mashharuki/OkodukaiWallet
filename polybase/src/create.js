@@ -1,7 +1,7 @@
 import { Polybase } from "@polybase/client";
 
 // DB name
-const nameSpace = "okozukai-mashharuki"
+const nameSpace = "okozukai-db3"
 
 const db = new Polybase({
   defaultNamespace: nameSpace,
@@ -12,6 +12,7 @@ await db.applySchema(`
   @public
   collection OkozukaiDB {
     id: string;
+    sender: string;
     type: string;
     tokenAddr: string;
     to: string;
@@ -20,9 +21,10 @@ await db.applySchema(`
     status: string;
     date: string;
 
-    @index(id, [date, desc]);
+    @index(sender, [date, desc]);
 
     constructor (
+      id: string,
       sender: string,
       type: string,
       tokenAddr: string,
@@ -32,7 +34,8 @@ await db.applySchema(`
       status: string,
       date: string
     ) {
-      this.id = sender;
+      this.id = id;
+      this.sender = sender;
       this.type = type;
       this.tokenAddr = tokenAddr;
       this.to = to;

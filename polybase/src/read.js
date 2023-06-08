@@ -2,7 +2,7 @@
 import { Polybase } from "@polybase/client";
 
 // DB name
-const nameSpace = "okozukai-mashharuki"
+const nameSpace = "okozukai-db3"
 
 const db = new Polybase({
   defaultNamespace: nameSpace,
@@ -10,7 +10,7 @@ const db = new Polybase({
 
 // read
 const data = await db.collection("OkozukaiDB")
-  .where("id", "==", "0xf71831F75970d515826890C37EC224474bc3c360")
+  .where("sender", "==", "0xf71831F75970d515826890C37EC224474bc3c360")
   .sort("date", "desc")
   .get();
 

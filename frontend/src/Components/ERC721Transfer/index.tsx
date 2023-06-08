@@ -1,9 +1,12 @@
+import { usePolybase } from "@polybase/react";
 import { useState } from 'react';
 import { sendNotifications } from '../../hooks/usePush';
-import { erc721Transfer } from '../../hooks/useUserOp';
+import { erc721Transfer, getAddress } from '../../hooks/useUserOp';
 import { NFT_ADDRESS } from "../../utils/Contents";
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
+import { DB_COLLECTION_NAME } from './../../utils/Contents';
+import { getCurrentTime } from './../../utils/date';
 
 /**
  * ERC721Transfer Component
@@ -12,6 +15,8 @@ const ERC721Transfer = (props:any) => {
     const [nftAddress, setNftAddress] = useState(NFT_ADDRESS);
     const [address, setAddress] = useState('');
     const [tokenId, setTokenId] = useState('');
+
+    const polybase = usePolybase();
 
     const {
         setIsLoading,
@@ -29,16 +34,34 @@ const ERC721Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
-            // NFTをトランスファーする。
+            // get sender address
+            const sender = await getAddress(factoryAddress);
+            // send NFT 
             await erc721Transfer(
                 nftAddress, 
                 address, 
                 tokenId, 
                 opts, 
                 factoryAddress
-            ).then(async() => {
+            ).then(async(res) => {
                 // send notifications
                 await sendNotifications(address);
+                const currentTime = getCurrentTime();
+                
+                // data insert to Polybase DB
+                await polybase
+                    .collection(DB_COLLECTION_NAME)
+                    .create([
+                        res,
+                        sender, 
+                        "NFT",
+                        nftAddress,
+                        address,
+                        tokenId,
+                        factoryAddress,
+                        "success",
+                        currentTime
+                    ]); 
             });;
             alert('Transfer successful');
             console.log('Transfer successful');

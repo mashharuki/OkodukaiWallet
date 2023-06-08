@@ -1,6 +1,5 @@
 import { usePolybase } from "@polybase/react";
 import { useState } from 'react';
-import { sendNotifications } from '../../hooks/usePush';
 import { getAddress, transfer } from '../../hooks/useUserOp';
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
@@ -27,33 +26,35 @@ const Transfer = (props:any) => {
             withPM: false, // Set to true if you want to use a paymaster
         };
         
-        // get sender address
-        const sender = await getAddress(factoryAddress);
+       
 
         try {
             setIsLoading(true);
+            // get sender address
+            const sender = await getAddress(factoryAddress);
             // call transfer method
             await transfer(
                 address, 
                 amount, 
                 opts, 
                 factoryAddress
-            ).then(async() => {
+            ).then(async(res) => {
                 // send notifications
-                await sendNotifications(address);
+                //await sendNotifications(address);
                 const currentTime = getCurrentTime();
                 
                 // data insert to Polybase DB
                 await polybase
                     .collection(DB_COLLECTION_NAME)
                     .create([
-                        sender,
+                        res,
+                        sender, 
                         "Native",
                         "0x0",
                         address,
                         amount,
                         factoryAddress,
-                        "sccess",
+                        "success",
                         currentTime
                     ]); 
             });
@@ -63,25 +64,8 @@ const Transfer = (props:any) => {
             setIsLoading(false);
         } catch (err) {
             console.error('Transfer failed', err);
-            const currentTime = getCurrentTime();
-                
-            // data insert to Polybase DB
-            await polybase
-                .collection(DB_COLLECTION_NAME)
-                .create([
-                    sender,
-                    "Native",
-                    "0x0",
-                    address,
-                    amount,
-                    factoryAddress,
-                    "fail",
-                    currentTime
-                ]); 
-
             alert('Transfer failed');
             setIsLoading(false);
-
         }
     };
 

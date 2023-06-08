@@ -1,9 +1,12 @@
+import { usePolybase } from "@polybase/react";
 import { useState } from 'react';
 import { sendNotifications } from '../../hooks/usePush';
-import { erc20Transfer } from '../../hooks/useUserOp';
+import { erc20Transfer, getAddress } from '../../hooks/useUserOp';
 import { LINK_TOKEN_ADDRESS } from "../../utils/Contents";
 import { CLIOpts } from "../../utils/types";
 import './../../css/App.css';
+import { DB_COLLECTION_NAME } from './../../utils/Contents';
+import { getCurrentTime } from './../../utils/date';
 
 /**
  * ER20Transfer Component
@@ -12,6 +15,8 @@ const ERC20Transfer = (props:any) => {
     const [tokenAddress, setTokenAddress] = useState(LINK_TOKEN_ADDRESS);
     const [address, setAddress] = useState('');
     const [amount, setAmount] = useState('');
+
+    const polybase = usePolybase();
 
     const {
         setIsLoading,
@@ -26,15 +31,35 @@ const ERC20Transfer = (props:any) => {
     
         try {
             setIsLoading(true);
+            // get sender address
+            const sender = await getAddress(factoryAddress);
+            // set ERC20 token
             await erc20Transfer(
                 tokenAddress, 
                 address, 
                 amount, 
                 opts, 
                 factoryAddress
-            ).then(async() => {
+            ).then(async(res) => {
                 // send notifications
                 await sendNotifications(address);
+
+                const currentTime = getCurrentTime();
+                
+                // data insert to Polybase DB
+                await polybase
+                    .collection(DB_COLLECTION_NAME)
+                    .create([
+                        res,
+                        sender, 
+                        "ERC20",
+                        tokenAddress,
+                        address,
+                        amount,
+                        factoryAddress,
+                        "success",
+                        currentTime
+                    ]); 
             });
             
             alert('Transfer successful');
